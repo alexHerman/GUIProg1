@@ -29,6 +29,15 @@ public class WeatherServiceUI extends javax.swing.JFrame {
 
         mainToolbar = new javax.swing.JToolBar();
         openFileButton = new javax.swing.JButton();
+        mainScrollPane = new javax.swing.JScrollPane();
+        mainPanel = new javax.swing.JPanel();
+        radioButtonPanel = new javax.swing.JPanel();
+        yearRadioButton = new javax.swing.JRadioButton();
+        dayRadioButton = new javax.swing.JRadioButton();
+        monthRadioButton = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
         mainMenuBar = new javax.swing.JMenuBar();
         exitMenuItem = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -48,6 +57,60 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         openFileButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         openFileButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         mainToolbar.add(openFileButton);
+
+        yearRadioButton.setText("Year");
+
+        dayRadioButton.setText("Day");
+
+        monthRadioButton.setText("Month");
+
+        javax.swing.GroupLayout radioButtonPanelLayout = new javax.swing.GroupLayout(radioButtonPanel);
+        radioButtonPanel.setLayout(radioButtonPanelLayout);
+        radioButtonPanelLayout.setHorizontalGroup(
+            radioButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(radioButtonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(yearRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
+                .addComponent(monthRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dayRadioButton)
+                .addContainerGap())
+        );
+        radioButtonPanelLayout.setVerticalGroup(
+            radioButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(radioButtonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(radioButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(yearRadioButton)
+                    .addComponent(dayRadioButton)
+                    .addComponent(monthRadioButton))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(radioButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 348, Short.MAX_VALUE))
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addComponent(radioButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 220, Short.MAX_VALUE))
+        );
+
+        mainScrollPane.setViewportView(mainPanel);
+
+        jLabel1.setText("Status Bar");
+
+        jRadioButton2.setText("jRadioButton2");
+
+        jRadioButton3.setText("jRadioButton3");
 
         exitMenuItem.setText("File");
 
@@ -77,13 +140,18 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainToolbar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(mainToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainScrollPane)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(mainToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 254, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainScrollPane)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1))
         );
 
         pack();
@@ -129,14 +197,23 @@ public class WeatherServiceUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton dayRadioButton;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu exitMenuItem;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar mainMenuBar;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JScrollPane mainScrollPane;
     private javax.swing.JToolBar mainToolbar;
+    private javax.swing.JRadioButton monthRadioButton;
     private javax.swing.JButton openFileButton;
     private javax.swing.JMenuItem openMenuItem;
+    private javax.swing.JPanel radioButtonPanel;
     private javax.swing.JMenu statisticsMenu;
+    private javax.swing.JRadioButton yearRadioButton;
     // End of variables declaration//GEN-END:variables
 }
