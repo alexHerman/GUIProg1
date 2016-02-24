@@ -5,6 +5,7 @@
  */
 package weatherservice;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Calendar;
  * @author Alex
  */
 public class DataPoint {
-    public Calendar date;
+    public LocalDate date;
     
     public float temperature;
     
@@ -21,6 +22,8 @@ public class DataPoint {
     public float barometer;
     
     public float windspeed;
+    
+    public WindDirection winddirection;
     
     public float windgust;
     
