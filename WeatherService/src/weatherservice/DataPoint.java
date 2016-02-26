@@ -5,7 +5,7 @@
  */
 package weatherservice;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 /**
@@ -13,7 +13,7 @@ import java.util.Calendar;
  * @author Alex
  */
 public class DataPoint {
-    public LocalDate date;
+    public LocalDateTime date;
     
     public float temperature;
     

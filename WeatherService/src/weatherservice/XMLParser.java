@@ -8,13 +8,10 @@ package weatherservice;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import org.w3c.dom.*;
 import static weatherservice.XmlUtil.asList;
 
 /**
@@ -23,6 +20,14 @@ import static weatherservice.XmlUtil.asList;
  */
 public class XMLParser {
     ArrayList<Year> years = new ArrayList<Year>();
+    
+    public void ParseFiles(String[] fileNames)
+    {
+        for (String fileName : fileNames)
+        {
+            ParseFile(fileName);
+        }
+    }
     
     public void ParseFile(String fileName)
     {
@@ -38,7 +43,6 @@ public class XMLParser {
             NodeList dataPoints = doc.getElementsByTagName("weather");
             for (Node point : asList(dataPoints)){
                 Element dataPoint = (Element)point;
-                
                 newData = CreateDataPoint(dataPoint);
                 InsertDataPoint(newData);
             }
@@ -64,52 +68,53 @@ public class XMLParser {
     {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(" MM/dd/yy ");
         DataPoint newData = new DataPoint();
-        NodeList x;
+        NodeList currentData;
         
-        x = dataPoint.getElementsByTagName("date");
-        if (x.getLength() > 0){
-            newData.date = LocalDate.parse(x.item(0).getTextContent(), dateFormat);
+        currentData = dataPoint.getElementsByTagName("date");
+        if (currentData.getLength() > 0){
+            newData.date = LocalDate.parse(currentData.item(0).getTextContent(), dateFormat).atTime(parseTime(
+                dataPoint.getElementsByTagName("time").item(0).getTextContent()));
         }
-        x = dataPoint.getElementsByTagName("barometer");
-        if (x.getLength() > 0){
-            newData.barometer = tryParseFloat(x.item(0).getTextContent());
+        currentData = dataPoint.getElementsByTagName("barometer");
+        if (currentData.getLength() > 0){
+            newData.barometer = tryParseFloat(currentData.item(0).getTextContent());
         }
-        x = dataPoint.getElementsByTagName("heatindex");
-        if (x.getLength() > 0){
-            newData.heatindex = tryParseFloat(x.item(0).getTextContent());
+        currentData = dataPoint.getElementsByTagName("heatindex");
+        if (currentData.getLength() > 0){
+            newData.heatindex = tryParseFloat(currentData.item(0).getTextContent());
         }
-        x = dataPoint.getElementsByTagName("humidity");
-        if (x.getLength() > 0){
-            newData.humidity = tryParseFloat(x.item(0).getTextContent());
+        currentData = dataPoint.getElementsByTagName("humidity");
+        if (currentData.getLength() > 0){
+            newData.humidity = tryParseFloat(currentData.item(0).getTextContent());
         }
-        x = dataPoint.getElementsByTagName("rainfall");
-        if (x.getLength() > 0){
-            newData.rainfall = tryParseFloat(x.item(0).getTextContent());
+        currentData = dataPoint.getElementsByTagName("rainfall");
+        if (currentData.getLength() > 0){
+            newData.rainfall = tryParseFloat(currentData.item(0).getTextContent());
         }
-        x = dataPoint.getElementsByTagName("temperature");
-        if (x.getLength() > 0){
-            newData.temperature = tryParseFloat(x.item(0).getTextContent());
+        currentData = dataPoint.getElementsByTagName("temperature");
+        if (currentData.getLength() > 0){
+            newData.temperature = tryParseFloat(currentData.item(0).getTextContent());
         }
-        x = dataPoint.getElementsByTagName("uvindex");
-        if (x.getLength() > 0){
-            newData.uvindex = tryParseFloat(x.item(0).getTextContent());
+        currentData = dataPoint.getElementsByTagName("uvindex");
+        if (currentData.getLength() > 0){
+            newData.uvindex = tryParseFloat(currentData.item(0).getTextContent());
         }
-        x = dataPoint.getElementsByTagName("windchill");
-        if (x.getLength() > 0){
-            newData.windchill = tryParseFloat(x.item(0).getTextContent());
+        currentData = dataPoint.getElementsByTagName("windchill");
+        if (currentData.getLength() > 0){
+            newData.windchill = tryParseFloat(currentData.item(0).getTextContent());
         }
-        x = dataPoint.getElementsByTagName("windgust");
-        if (x.getLength() > 0){
-            newData.windgust = tryParseFloat(x.item(0).getTextContent());
+        currentData = dataPoint.getElementsByTagName("windgust");
+        if (currentData.getLength() > 0){
+            newData.windgust = tryParseFloat(currentData.item(0).getTextContent());
         }
-        x = dataPoint.getElementsByTagName("windspeed");
-        if (x.getLength() > 0){
-            newData.windspeed = tryParseFloat(x.item(0).getTextContent());
+        currentData = dataPoint.getElementsByTagName("windspeed");
+        if (currentData.getLength() > 0){
+            newData.windspeed = tryParseFloat(currentData.item(0).getTextContent());
         }
         
-        x = dataPoint.getElementsByTagName("winddirection");
-        if (x.getLength() > 0){
-            newData.winddirection = getDirection(x.item(0).getTextContent());
+        currentData = dataPoint.getElementsByTagName("winddirection");
+        if (currentData.getLength() > 0){
+            newData.winddirection = getDirection(currentData.item(0).getTextContent());
         }
         
         
@@ -118,22 +123,50 @@ public class XMLParser {
     
     private float tryParseFloat(String num)
     {
-        if (num.isEmpty())
-            return 0;
-        else
+        try 
+        {
             return Float.parseFloat(num);
+        }
+        catch (Exception e)
+        {
+            return 0;
+        }
     }
     
     private WindDirection getDirection(String direction)
     {
-        if (direction.equals(" E "))
-            return WindDirection.EAST;
+        if (direction.equals(" N "))
+            return WindDirection.N;
+        else if (direction.equals(" NNE "))
+            return WindDirection.NNE;
+        else if (direction.equals(" NE "))
+            return WindDirection.NE;
+        else if (direction.equals(" ENE "))
+            return WindDirection.ENE;
+        else if (direction.equals(" E "))
+            return WindDirection.E;
+        else if (direction.equals(" ESE "))
+            return WindDirection.ESE;
+        else if (direction.equals(" SE "))
+            return WindDirection.SE;
+        else if (direction.equals(" SSE "))
+            return WindDirection.SSE;
+        else if (direction.equals(" S "))
+            return WindDirection.S;
+        else if (direction.equals(" SSW "))
+            return WindDirection.SSW;
+        else if (direction.equals(" SW "))
+            return WindDirection.SW;
+        else if (direction.equals(" WSW "))
+            return WindDirection.WSW;
         else if (direction.equals(" W "))
-            return WindDirection.WEST;
-        else if (direction.equals(" N "))
-            return WindDirection.NORTH;
+            return WindDirection.W;
+        else if (direction.equals(" WNW "))
+            return WindDirection.WNW;
+        else if (direction.equals(" NW "))
+            return WindDirection.NW;
         else
-            return WindDirection.SOUTH;
+            return WindDirection.NNW;
     }
     
     private void InsertDataPoint(DataPoint newData)
@@ -182,5 +215,35 @@ public class XMLParser {
         }
         
         foundDay.dataPoints.add(newData);
+    }
+    
+    private LocalTime parseTime(String timeText)
+    {
+        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter format2 = DateTimeFormatter.ofPattern("H:mm");
+        LocalTime time;
+        
+        try
+        {
+            time = LocalTime.parse(timeText.substring(1, timeText.length() - 3), format1);
+        }
+        catch(Exception e)
+        {
+            time = LocalTime.parse(timeText.substring(1, timeText.length() - 2), format2);
+        }
+        
+        String t = timeText.substring(timeText.length() - 2);
+        if (t.equals("P "))
+        {
+            if (time.getHour() != 12)
+                time = time.plusHours(12);
+        }
+        else if (t.equals("A "))
+        {
+            if (time.getHour() == 12)
+                time = time.minusHours(12);
+        }
+        
+        return time;
     }
 }
