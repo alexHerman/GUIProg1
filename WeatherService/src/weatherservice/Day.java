@@ -5,6 +5,7 @@
  */
 package weatherservice;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -14,5 +15,10 @@ import java.util.LinkedList;
 public class Day {
     public int dayOfMonth;
     
-    public LinkedList<DataPoint> dataPoints;
+    public ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
+    
+    Day (int dayOfMonth)
+    {
+        this.dayOfMonth = dayOfMonth;
+    }
 }
