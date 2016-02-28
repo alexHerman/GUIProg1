@@ -17,7 +17,7 @@ public class WeatherService {
     public static void main(String[] args) {
         XMLParser parser = new XMLParser();
         
-        parser.ParseDirectory("/home/aherman/Documents/GUI/GUIProg1/Data");
+        parser.ParseDirectory("C:/Users/Alex/Documents/NetBeansProjects/GUIProg1/Data");
         
         int x = 1;
     }
