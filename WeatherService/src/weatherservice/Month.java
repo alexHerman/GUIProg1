@@ -6,7 +6,6 @@
 package weatherservice;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  *
@@ -15,11 +14,10 @@ import java.util.LinkedList;
 public class Month {
     public int monthOfYear;
     
-    public ArrayList<Day> days;
+    public ArrayList<Day> days = new ArrayList<Day>();
     
     Month(int monthNumber)
     {
         monthOfYear = monthNumber;
-        
     }
 }

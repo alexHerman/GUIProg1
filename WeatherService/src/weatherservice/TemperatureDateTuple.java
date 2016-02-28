@@ -1,9 +1,9 @@
 package weatherservice;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TemperatureDateTuple
 {
-    public LocalDate date;
+    public LocalDateTime date;
     public float temperature;
 }

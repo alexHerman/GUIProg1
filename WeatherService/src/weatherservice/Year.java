@@ -15,21 +15,10 @@ import java.util.LinkedList;
 public class Year {
     public int yearNumber;
     
-    public ArrayList<Month> months;
+    public ArrayList<Month> months = new ArrayList<Month>();
     
     Year(int yearNumber)
     {
-        months.add(new Month(1));
-        months.add(new Month(2));
-        months.add(new Month(3);
-        months.add(new Month(4));
-        months.add(new Month(5));
-        months.add(new Month(6));
-        months.add(new Month(7));
-        months.add(new Month(8));
-        months.add(new Month(9));
-        months.add(new Month(10));
-        months.add(new Month(11));
-        months.add(new Month(12));
+        this.yearNumber = yearNumber;
     }
 }

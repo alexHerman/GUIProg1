@@ -2,7 +2,7 @@
 
     <weather>
         <date> 01/01/10 </date>
-        <time> 12:15A </time>
+        <time> 12:15AM </time>
         <temperature> 8.3 </temperature>
         <humidity> 82.0 </humidity>
         <barometer> 26.844 </barometer>

@@ -15,7 +15,11 @@ public class WeatherService {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        XMLParser parser = new XMLParser();
+        
+        parser.ParseDirectory("/home/aherman/Documents/GUI/GUIProg1/Data");
+        
+        int x = 1;
     }
     
 }
