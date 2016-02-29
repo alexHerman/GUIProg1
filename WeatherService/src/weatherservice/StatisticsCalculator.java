@@ -397,8 +397,7 @@ public class StatisticsCalculator
 
         for(DataPoint point : day.dataPoints)
         {
-            //Figure out how rainfall is stored (cumulative, amount at the time,
-            //etc.) and make this loop do the right stuff
+            rainfall += point.rainfall;
         }
 
         return rainfall;
