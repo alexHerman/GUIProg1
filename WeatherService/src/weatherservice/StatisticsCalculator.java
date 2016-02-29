@@ -1,11 +1,11 @@
 package weatherservice;
 
-//Contains static methods for every calculation that needs to be provided, with
-//overloads of each calculation for different types of input (year, month, etc.)
 /**
  *
  * @author Austin Rotert
  */
+//Contains static methods for every calculation that needs to be provided, with
+//overloads of each calculation for different types of input (year, month, etc.)
 public class StatisticsCalculator
 {
     /**
