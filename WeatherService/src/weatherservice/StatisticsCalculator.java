@@ -1,7 +1,19 @@
 package weatherservice;
 
+//Contains static methods for every calculation that needs to be provided, with
+//overloads of each calculation for different types of input (year, month, etc.)
+/**
+ *
+ * @author Austin Rotert
+ */
 public class StatisticsCalculator
 {
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the mean temperature of
+    * @return Returns a floating point representing the average temperature
+    */
     //Calculates and returns the average temperature over a given year
     public static float MeanTemperature(Year year)
     {
@@ -15,6 +27,12 @@ public class StatisticsCalculator
         return avg / year.months.size();
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param month Month object to calculate the mean temperature of
+    * @return Returns a floating point representing the average temperature
+    */
     //Calculates and returns the average temperature over a given month
     public static float MeanTemperature(Month month)
     {
@@ -28,6 +46,12 @@ public class StatisticsCalculator
         return avg / month.days.size();
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param day Day object to calculate the mean temperature of
+    * @return Returns a floating point representing the average temperature
+    */
     //Calculates and returns the average temperature over a given day
     public static float MeanTemperature(Day day)
     {
@@ -41,6 +65,12 @@ public class StatisticsCalculator
         return avg / day.dataPoints.size();
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the max temperature of
+    * @return Returns a floating point representing the max temperature
+    */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given year
     public static TemperatureDateTuple MaxTemperature(Year year)
@@ -61,6 +91,12 @@ public class StatisticsCalculator
         return max;
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param month Month object to calculate the max temperature of
+    * @return Returns a floating point representing the max temperature
+    */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given month
     public static TemperatureDateTuple MaxTemperature(Month month)
@@ -81,6 +117,12 @@ public class StatisticsCalculator
         return max;
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param day Day object to calculate the max temperature of
+    * @return Returns a floating point representing the max temperature
+    */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given day
     public static TemperatureDateTuple MaxTemperature(Day day)
@@ -99,6 +141,12 @@ public class StatisticsCalculator
         return max;
     }
     
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the min temperature of
+    * @return Returns a floating point representing the min temperature
+    */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given year
     public static TemperatureDateTuple MinTemperature(Year year)
@@ -119,6 +167,12 @@ public class StatisticsCalculator
         return min;
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param month Month object to calculate the min temperature of
+    * @return Returns a floating point representing the min temperature
+    */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given month
     public static TemperatureDateTuple MinTemperature(Month month)
@@ -139,6 +193,12 @@ public class StatisticsCalculator
         return min;
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param day Day object to calculate the min temperature of
+    * @return Returns a floating point representing the min temperature
+    */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given day
     public static TemperatureDateTuple MinTemperature(Day day)
@@ -157,6 +217,12 @@ public class StatisticsCalculator
         return min;
     }
     
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the average wind speed of
+    * @return Returns a floating point representing the average wind speed
+    */
     //Calculates and returns the average wind speed over a given year
     public static float MeanWindSpeed(Year year)
     {
@@ -170,6 +236,12 @@ public class StatisticsCalculator
         return avg / year.months.size();
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param month Month object to calculate the average wind speed of
+    * @return Returns a floating point representing the average wind speed
+    */
     //Calculates and returns the average wind speed over a given month
     public static float MeanWindSpeed(Month month)
     {
@@ -183,6 +255,12 @@ public class StatisticsCalculator
         return avg / month.days.size();
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param day Day object to calculate the average wind speed of
+    * @return Returns a floating point representing the average wind speed
+    */
     //Calculates and returns the average wind speed over a given day
     public static float MeanWindSpeed(Day day)
     {
@@ -196,6 +274,12 @@ public class StatisticsCalculator
         return avg / day.dataPoints.size();
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the max wind gust of
+    * @return Returns a floating point representing the max wind gust
+    */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given year
     public static WindSpeedDateTuple MaxWindSpeed(Year year)
@@ -216,6 +300,12 @@ public class StatisticsCalculator
         return max;
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param month Month object to calculate the max wind gust of
+    * @return Returns a floating point representing the max wind gust
+    */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given month
     public static WindSpeedDateTuple MaxWindSpeed(Month month)
@@ -236,6 +326,12 @@ public class StatisticsCalculator
         return max;
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param day Day object to calculate the max wind gust of
+    * @return Returns a floating point representing the max wind gust
+    */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given day
     public static WindSpeedDateTuple MaxWindSpeed(Day day)
@@ -254,6 +350,12 @@ public class StatisticsCalculator
         return max;
     }
     
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the min wind gust of
+    * @return Returns a floating point representing the min wind gust
+    */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given year
     public static WindSpeedDateTuple MinWindspeed(Year year)
@@ -274,6 +376,12 @@ public class StatisticsCalculator
         return min;
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param month Month object to calculate the min wind gust of
+    * @return Returns a floating point representing the min wind gust
+    */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given month
     public static WindSpeedDateTuple MinWindSpeed(Month month)
@@ -294,6 +402,12 @@ public class StatisticsCalculator
         return min;
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param day Day object to calculate the min wind gust of
+    * @return Returns a floating point representing the min wind gust
+    */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given day
     public static WindSpeedDateTuple MinWindSpeed(Day day)
@@ -312,6 +426,12 @@ public class StatisticsCalculator
         return min;
     }
     
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the prevailing wind direction of
+    * @return Returns a floating point representing the prevailing wind direction
+    */
     //Calculates and returns the prevailing wind direction over a given year
     public static WindDirection PrevailingWindDirection(Year year)
     {
@@ -330,6 +450,12 @@ public class StatisticsCalculator
         return result;
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param month Month object to calculate the prevailing wind direction of
+    * @return Returns a floating point representing the prevailing wind direction
+    */
     //Calculates and returns the prevailing wind direction over a given month
     public static WindDirection PrevailingWindDirection(Month month)
     {
@@ -348,6 +474,12 @@ public class StatisticsCalculator
         return result;
     }
 
+    /**
+    *
+    * @author Austin Rotert
+    * @param day Day object to calculate the prevailing wind direction of
+    * @return Returns a floating point representing the prevailing wind direction
+    */
     //Calculates and returns the prevailing wind direction over a given day
     public static WindDirection PrevailingWindDirection(Day day)
     {
@@ -364,7 +496,13 @@ public class StatisticsCalculator
         return result;
     }
         
-    //Calculates and returns the prevailing wind direction over a given year
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the total rainfall of
+    * @return Returns a floating point representing the total rainfall
+    */
+    //Calculates and returns the total rainfall over a given year
     public static float TotalRainfall(Year year)
     {
         float rainfall = 0;
@@ -377,7 +515,13 @@ public class StatisticsCalculator
         return rainfall;
     }
 
-    //Calculates and returns the prevailing wind direction over a given month
+    /**
+    *
+    * @author Austin Rotert
+    * @param month Month object to calculate the total rainfall of
+    * @return Returns a floating point representing the total rainfall
+    */
+    //Calculates and returns the total rainfall over a given month
     public static float TotalRainfall(Month month)
     {
         float rainfall = 0;
@@ -390,7 +534,13 @@ public class StatisticsCalculator
         return rainfall;
     }
 
-    //Calculates and returns the prevailing wind direction over a given day
+    /**
+    *
+    * @author Austin Rotert
+    * @param day Day object to calculate the total rainfall of
+    * @return Returns a floating point representing the total rainfall
+    */
+    //Calculates and returns the total rainfall over a given day
     public static float TotalRainfall(Day day)
     {
         float rainfall = 0;
@@ -403,6 +553,12 @@ public class StatisticsCalculator
         return rainfall;
     }
     
+    /**
+    *
+    * @author Austin Rotert
+    * @param counts array of the count for each wind direction
+    * @return The wind direction with the largest count
+    */
     //Helper method for finding the most frequent wind direction
     private static WindDirection FindWindDirectionMode(int counts[])
     {
