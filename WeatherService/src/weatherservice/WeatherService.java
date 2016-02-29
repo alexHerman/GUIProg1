@@ -16,10 +16,9 @@ public class WeatherService {
      */
     public static void main(String[] args) {
         XMLParser parser = new XMLParser();
+        //DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
-        parser.ParseDirectory("C:/Users/Alex/Documents/NetBeansProjects/GUIProg1/Data");
-        
-        int x = 1;
+        //JFreeChart lineChart = ChartFactory.createLineChart("Data", "Years", "x",)
     }
     
 }
