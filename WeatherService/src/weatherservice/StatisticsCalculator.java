@@ -128,6 +128,7 @@ public class StatisticsCalculator
     public static TemperatureDateTuple MaxTemperature(MyDay day)
     {
         TemperatureDateTuple max = new TemperatureDateTuple();
+        max.temperature = -100;
 
         for(DataPoint point : day.dataPoints)
         {
@@ -204,6 +205,7 @@ public class StatisticsCalculator
     public static TemperatureDateTuple MinTemperature(MyDay day)
     {
         TemperatureDateTuple min = new TemperatureDateTuple();
+        min.temperature = 1000000;
 
         for(DataPoint point : day.dataPoints)
         {
