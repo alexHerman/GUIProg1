@@ -14,7 +14,7 @@ public class WeatherService {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void amain(String[] args) {
         XMLParser parser = new XMLParser();
         //parser.ParseDirectory("C:\\Users\\Alex\\Documents\\NetBeansProjects\\GUIProg1\\Data");
         //DefaultCategoryDataset dataset = new DefaultCategoryDataset();

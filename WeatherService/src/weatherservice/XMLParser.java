@@ -20,7 +20,7 @@ import static weatherservice.XmlUtil.asList;
  * @author Alex
  */
 public class XMLParser {
-    static ArrayList<MyYear> years = new ArrayList<MyYear>();
+    public ArrayList<MyYear> years = new ArrayList<MyYear>();
     
     public void ParseFiles(String[] fileNames)
     {

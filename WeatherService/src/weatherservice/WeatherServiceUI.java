@@ -28,7 +28,8 @@ import org.jfree.ui.RectangleInsets;
  * @author Hamm3rTim3
  */
 public class WeatherServiceUI extends javax.swing.JFrame {
-
+    static XMLParser parser = new XMLParser();
+    
     /**
      * Creates new form WeatherServiceUI
      */
@@ -37,8 +38,10 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         setupChart();
     }
     
-    private void setupChart(){        
-        JFreeChart graph = ChartFactory.createTimeSeriesChart("Thing", "Days", "Temp", createDataset(), false, false, false);
+    private void setupChart(){
+        parser.ParseDirectory("/home/aherman/Documents/GUI/GUIProg1/Data");
+        DatasetBuilder builder = new DatasetBuilder();
+        JFreeChart graph = ChartFactory.createTimeSeriesChart("Thing", "Days", "Temp", builder.createDayDataSet(parser.years.get(0).months.get(0).days.get(0)), false, false, false);
         graph.setBackgroundPaint(Color.white);
 
         XYPlot plot = (XYPlot) graph.getPlot();
@@ -492,7 +495,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         openFile.showOpenDialog(this);
         File inputFile[] = openFile.getSelectedFiles();
         for(File i : inputFile){
-            System.out.println(i.getAbsolutePath());
+            parser.ParseFile(i.getAbsolutePath());
         }
     }//GEN-LAST:event_openMenuItemActionPerformed
 

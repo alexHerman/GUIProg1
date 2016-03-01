@@ -7,14 +7,13 @@ package weatherservice;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
  *
  * @author Alex
  */
-public class DataPoint extends org.jfree.data.time.Day {
+public class DataPoint extends org.jfree.data.time.Minute {
     public LocalDateTime date;
     
     public float temperature;
@@ -38,11 +37,11 @@ public class DataPoint extends org.jfree.data.time.Day {
     public float rainfall;
     
     DataPoint(LocalDateTime date){
-        super(Date.from(date.atZone(ZoneId.systemDefault()).toInstant()));
+        super(date.getMinute(), date.getHour(), date.getDayOfMonth(), date.getMonthValue(), date.getYear());
         this.date = date;
     }
-
-    DataPoint() {
-        
+    
+    DataPoint()
+    {
     }
 }
