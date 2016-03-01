@@ -29,6 +29,7 @@ import org.jfree.ui.RectangleInsets;
  */
 public class WeatherServiceUI extends javax.swing.JFrame {
     static XMLParser parser = new XMLParser();
+    JFreeChart graph;
     
     /**
      * Creates new form WeatherServiceUI
@@ -41,7 +42,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
     private void setupChart(){
         parser.ParseDirectory("/home/aherman/Documents/GUI/GUIProg1/Data");
         DatasetBuilder builder = new DatasetBuilder();
-        JFreeChart graph = ChartFactory.createTimeSeriesChart("Thing", "Days", "Temp", builder.createDayDataSet(parser.years.get(0).months.get(0).days.get(0)), false, false, false);
+        graph = ChartFactory.createTimeSeriesChart("Thing", "Days", "Temp", builder.createTempDataSet(parser.years.get(0).months.get(0)), false, false, false);
         graph.setBackgroundPaint(Color.white);
 
         XYPlot plot = (XYPlot) graph.getPlot();
@@ -506,12 +507,15 @@ public class WeatherServiceUI extends javax.swing.JFrame {
 
     private void yearRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearRadioButtonActionPerformed
         //Set the graph to display an entire year from the current date
-        System.out.println("Year");
+        DatasetBuilder builder = new DatasetBuilder();
+        graph.getXYPlot().setDataset(builder.createTempDataSet(parser.years.get(0)));
     }//GEN-LAST:event_yearRadioButtonActionPerformed
 
     private void monthRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthRadioButtonActionPerformed
         //Set the graph to display a single month
-        System.out.println("Month");
+        DatasetBuilder builder = new DatasetBuilder();
+        
+        graph.getXYPlot().setDataset(builder.createTempDataSet(parser.years.get(0).months.get(0)));
     }//GEN-LAST:event_monthRadioButtonActionPerformed
 
     private void allDataRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allDataRadioButtonActionPerformed
@@ -526,7 +530,8 @@ public class WeatherServiceUI extends javax.swing.JFrame {
 
     private void dayRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayRadioButtonActionPerformed
         //Display a single day of data
-        System.out.println("Day");
+        DatasetBuilder builder = new DatasetBuilder();
+        graph.getXYPlot().setDataset(builder.createTempDataSet(parser.years.get(0).months.get(0).days.get(0)));
     }//GEN-LAST:event_dayRadioButtonActionPerformed
 
     private void graphOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graphOptionsActionPerformed
