@@ -156,6 +156,14 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         lowLabelValue = new javax.swing.JLabel();
         avgLabel = new javax.swing.JLabel();
         avgLabelValue = new javax.swing.JLabel();
+        windStatsLabel = new javax.swing.JLabel();
+        maxWindLabel = new javax.swing.JLabel();
+        windDirectionLabel = new javax.swing.JLabel();
+        windSpeedValue = new javax.swing.JLabel();
+        windDirValue = new javax.swing.JLabel();
+        rainfallStatsLabel = new javax.swing.JLabel();
+        rainfallLabel = new javax.swing.JLabel();
+        rainfallValue = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -292,6 +300,22 @@ public class WeatherServiceUI extends javax.swing.JFrame {
 
         avgLabelValue.setText("50.0");
 
+        windStatsLabel.setText("Wind Statistics: ");
+
+        maxWindLabel.setText("Max Wind Speed:");
+
+        windDirectionLabel.setText("Prevailing Wind Direction:");
+
+        windSpeedValue.setText("10 MPH");
+
+        windDirValue.setText("N");
+
+        rainfallStatsLabel.setText("Rainfall Statistics:");
+
+        rainfallLabel.setText("Rainfall:");
+
+        rainfallValue.setText("10 in");
+
         javax.swing.GroupLayout graphOptionsPanelLayout = new javax.swing.GroupLayout(graphOptionsPanel);
         graphOptionsPanel.setLayout(graphOptionsPanelLayout);
         graphOptionsPanelLayout.setHorizontalGroup(
@@ -301,27 +325,49 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                 .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(graphOptionsPanelLayout.createSequentialGroup()
                         .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(graphOptions, 0, 192, Short.MAX_VALUE)
+                            .addComponent(graphOptions, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(graphOptionsPanelLayout.createSequentialGroup()
-                                .addComponent(statsLabel)
+                                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(statsLabel)
+                                    .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(avgLabel)
+                                            .addComponent(highLabel)
+                                            .addComponent(lowLabel))
+                                        .addGap(45, 45, 45)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
-                    .addGroup(graphOptionsPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(graphOptionsPanelLayout.createSequentialGroup()
-                                .addComponent(avgLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(avgLabelValue))
-                            .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, graphOptionsPanelLayout.createSequentialGroup()
+                        .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, graphOptionsPanelLayout.createSequentialGroup()
                                 .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(highLabel)
-                                    .addComponent(lowLabel))
-                                .addGap(34, 34, 34)
+                                    .addComponent(windStatsLabel)
+                                    .addComponent(rainfallStatsLabel))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, graphOptionsPanelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
                                 .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                                        .addComponent(maxWindLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(windSpeedValue))
+                                    .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                                        .addComponent(windDirectionLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(windDirValue)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                                        .addComponent(rainfallLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(rainfallValue))))
+                            .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lowLabelValue, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(highLabelValue))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(highLabelValue)
+                                    .addComponent(avgLabelValue))))
+                        .addGap(18, 18, 18))))
         );
         graphOptionsPanelLayout.setVerticalGroup(
             graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,7 +388,23 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                 .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(avgLabel)
                     .addComponent(avgLabelValue))
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(windStatsLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(maxWindLabel)
+                    .addComponent(windSpeedValue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(windDirectionLabel)
+                    .addComponent(windDirValue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rainfallStatsLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rainfallLabel)
+                    .addComponent(rainfallValue))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -357,7 +419,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                         .addComponent(graphPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(graphOptionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addGap(0, 50, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -556,14 +618,22 @@ public class WeatherServiceUI extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane mainScrollPane;
     private javax.swing.JToolBar mainToolbar;
+    private javax.swing.JLabel maxWindLabel;
     private javax.swing.JRadioButton monthRadioButton;
     private javax.swing.JButton openFileButton;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.ButtonGroup radioButtonGroup;
     private javax.swing.JPanel radioButtonPanel;
+    private javax.swing.JLabel rainfallLabel;
+    private javax.swing.JLabel rainfallStatsLabel;
+    private javax.swing.JLabel rainfallValue;
     private javax.swing.JMenu statisticsMenu;
     private javax.swing.JLabel statsLabel;
     private javax.swing.JRadioButton weekRadioButton;
+    private javax.swing.JLabel windDirValue;
+    private javax.swing.JLabel windDirectionLabel;
+    private javax.swing.JLabel windSpeedValue;
+    private javax.swing.JLabel windStatsLabel;
     private javax.swing.JRadioButton yearRadioButton;
     // End of variables declaration//GEN-END:variables
 }

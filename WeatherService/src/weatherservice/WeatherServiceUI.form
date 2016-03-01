@@ -128,7 +128,7 @@
                               <Component id="graphOptionsPanel" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="50" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -285,35 +285,65 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="graphOptions" alignment="0" pref="192" max="32767" attributes="0"/>
+                                      <Component id="graphOptions" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="statsLabel" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="statsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="avgLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="highLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lowLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="avgLabel" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="avgLabelValue" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="windStatsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rainfallStatsLabel" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="highLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lowLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="maxWindLabel" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
+                                                  <Component id="windSpeedValue" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="windDirectionLabel" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="windDirValue" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="rainfallLabel" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
+                                                  <Component id="rainfallValue" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
-                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
                                               <Component id="lowLabelValue" min="-2" pref="20" max="-2" attributes="0"/>
-                                              <Component id="highLabelValue" min="-2" max="-2" attributes="0"/>
+                                              <Component id="highLabelValue" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="avgLabelValue" alignment="1" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -341,7 +371,26 @@
                               <Component id="avgLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="avgLabelValue" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="239" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="windStatsLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="maxWindLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="windSpeedValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="windDirectionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="windDirValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="rainfallStatsLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="rainfallLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rainfallValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="139" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -403,6 +452,46 @@
                 <Component class="javax.swing.JLabel" name="avgLabelValue">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="50.0"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="windStatsLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Wind Statistics: "/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="maxWindLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Max Wind Speed:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="windDirectionLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Prevailing Wind Direction:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="windSpeedValue">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="10 MPH"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="windDirValue">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="N"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="rainfallStatsLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Rainfall Statistics:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="rainfallLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Rainfall:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="rainfallValue">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="10 in"/>
                   </Properties>
                 </Component>
               </SubComponents>
