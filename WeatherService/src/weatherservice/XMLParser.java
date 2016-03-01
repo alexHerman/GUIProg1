@@ -9,6 +9,7 @@ import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import static weatherservice.XmlUtil.asList;
  * @author Alex
  */
 public class XMLParser {
-    ArrayList<Year> years = new ArrayList<Year>();
+    static ArrayList<MyYear> years = new ArrayList<MyYear>();
     
     public void ParseFiles(String[] fileNames)
     {
@@ -67,14 +68,21 @@ public class XMLParser {
     private DataPoint CreateDataPoint(Element dataPoint)
     {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(" MM/dd/yy ");
-        DataPoint newData = new DataPoint();
         NodeList currentData;
+        LocalDateTime newDate;
+        DataPoint newData;
         
         currentData = dataPoint.getElementsByTagName("date");
         if (currentData.getLength() > 0){
-            newData.date = LocalDate.parse(currentData.item(0).getTextContent(), dateFormat).atTime(parseTime(
+            newDate = LocalDate.parse(currentData.item(0).getTextContent(), dateFormat).atTime(parseTime(
                 dataPoint.getElementsByTagName("time").item(0).getTextContent()));
+            
+            newData = new DataPoint(newDate);
         }
+        else{
+            newData = new DataPoint();
+        }
+        
         currentData = dataPoint.getElementsByTagName("barometer");
         if (currentData.getLength() > 0){
             newData.barometer = tryParseFloat(currentData.item(0).getTextContent());
@@ -171,20 +179,20 @@ public class XMLParser {
     
     private void InsertDataPoint(DataPoint newData)
     {
-        Year foundYear = null;
-        myMonth foundMonth = null;
-        Day foundDay = null;
-        for (Year year : years)
+        MyYear foundYear = null;
+        MyMonth foundMonth = null;
+        MyDay foundDay = null;
+        for (MyYear year : years)
         {
             if (year.yearNumber == newData.date.getYear())
             {
                 foundYear = year;
-                for (myMonth month : year.months)
+                for (MyMonth month : year.months)
                 {
                     if (month.monthOfYear == newData.date.getMonthValue())
                     {
                         foundMonth = month;
-                        for (Day day : month.days)
+                        for (MyDay day : month.days)
                         {
                             if (day.dayOfMonth == newData.date.getDayOfMonth())
                             {
@@ -198,19 +206,19 @@ public class XMLParser {
         
         if (foundYear == null)
         {
-            foundYear = new Year(newData.date.getYear());
+            foundYear = new MyYear(newData.date.getYear());
             years.add(foundYear);
         }
         
         if (foundMonth == null)
         {
-            foundMonth = new myMonth(newData.date.getMonthValue());
+            foundMonth = new MyMonth(newData.date.getMonthValue(), foundYear.yearNumber);
             foundYear.months.add(foundMonth);
         }
         
         if (foundDay == null)
         {
-            foundDay = new Day(newData.date.getDayOfMonth());
+            foundDay = new MyDay(newData.date.getDayOfMonth(), foundMonth.monthOfYear, foundYear.yearNumber);
             foundMonth.days.add(foundDay);
         }
         

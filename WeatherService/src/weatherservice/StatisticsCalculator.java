@@ -15,11 +15,11 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the average temperature
     */
     //Calculates and returns the average temperature over a given year
-    public static float MeanTemperature(Year year)
+    public static float MeanTemperature(MyYear year)
     {
         float avg = 0;
 
-        for(myMonth month : year.months)
+        for(MyMonth month : year.months)
         {
             avg += MeanTemperature(month);
         }
@@ -34,11 +34,11 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the average temperature
     */
     //Calculates and returns the average temperature over a given month
-    public static float MeanTemperature(myMonth month)
+    public static float MeanTemperature(MyMonth month)
     {
         float avg = 0;
 
-        for(Day day : month.days)
+        for(MyDay day : month.days)
         {
             avg += MeanTemperature(day);
         }
@@ -53,7 +53,7 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the average temperature
     */
     //Calculates and returns the average temperature over a given day
-    public static float MeanTemperature(Day day)
+    public static float MeanTemperature(MyDay day)
     {
         float avg = 0;
 
@@ -73,12 +73,12 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given year
-    public static TemperatureDateTuple MaxTemperature(Year year)
+    public static TemperatureDateTuple MaxTemperature(MyYear year)
     {
         TemperatureDateTuple max = new TemperatureDateTuple();
         TemperatureDateTuple current;
 
-        for(myMonth month : year.months)
+        for(MyMonth month : year.months)
         {
             current = MaxTemperature(month);
 
@@ -99,12 +99,12 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given month
-    public static TemperatureDateTuple MaxTemperature(myMonth month)
+    public static TemperatureDateTuple MaxTemperature(MyMonth month)
     {
         TemperatureDateTuple max = new TemperatureDateTuple();
         TemperatureDateTuple current;
 
-        for(Day day : month.days)
+        for(MyDay day : month.days)
         {
             current = MaxTemperature(day);
 
@@ -125,7 +125,7 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given day
-    public static TemperatureDateTuple MaxTemperature(Day day)
+    public static TemperatureDateTuple MaxTemperature(MyDay day)
     {
         TemperatureDateTuple max = new TemperatureDateTuple();
 
@@ -149,12 +149,12 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given year
-    public static TemperatureDateTuple MinTemperature(Year year)
+    public static TemperatureDateTuple MinTemperature(MyYear year)
     {
         TemperatureDateTuple min = new TemperatureDateTuple();
         TemperatureDateTuple current;
 
-        for(myMonth month : year.months)
+        for(MyMonth month : year.months)
         {
             current = MaxTemperature(month);
 
@@ -175,12 +175,12 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given month
-    public static TemperatureDateTuple MinTemperature(myMonth month)
+    public static TemperatureDateTuple MinTemperature(MyMonth month)
     {
         TemperatureDateTuple min = new TemperatureDateTuple();
         TemperatureDateTuple current;
 
-        for(Day day : month.days)
+        for(MyDay day : month.days)
         {
             current = MaxTemperature(day);
 
@@ -201,7 +201,7 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given day
-    public static TemperatureDateTuple MinTemperature(Day day)
+    public static TemperatureDateTuple MinTemperature(MyDay day)
     {
         TemperatureDateTuple min = new TemperatureDateTuple();
 
@@ -224,11 +224,11 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the average wind speed
     */
     //Calculates and returns the average wind speed over a given year
-    public static float MeanWindSpeed(Year year)
+    public static float MeanWindSpeed(MyYear year)
     {
         float avg = 0;
 
-        for(myMonth month : year.months)
+        for(MyMonth month : year.months)
         {
             avg += MeanWindSpeed(month);
         }
@@ -243,11 +243,11 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the average wind speed
     */
     //Calculates and returns the average wind speed over a given month
-    public static float MeanWindSpeed(myMonth month)
+    public static float MeanWindSpeed(MyMonth month)
     {
         float avg = 0;
 
-        for(Day day : month.days)
+        for(MyDay day : month.days)
         {
             avg += MeanWindSpeed(day);
         }
@@ -262,7 +262,7 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the average wind speed
     */
     //Calculates and returns the average wind speed over a given day
-    public static float MeanWindSpeed(Day day)
+    public static float MeanWindSpeed(MyDay day)
     {
         float avg = 0;
 
@@ -282,12 +282,12 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given year
-    public static WindSpeedDateTuple MaxWindSpeed(Year year)
+    public static WindSpeedDateTuple MaxWindSpeed(MyYear year)
     {
         WindSpeedDateTuple max = new WindSpeedDateTuple();
         WindSpeedDateTuple current;
 
-        for(myMonth month : year.months)
+        for(MyMonth month : year.months)
         {
             current = MaxWindSpeed(month);
 
@@ -308,12 +308,12 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given month
-    public static WindSpeedDateTuple MaxWindSpeed(myMonth month)
+    public static WindSpeedDateTuple MaxWindSpeed(MyMonth month)
     {
         WindSpeedDateTuple max = new WindSpeedDateTuple();
         WindSpeedDateTuple current;
 
-        for(Day day : month.days)
+        for(MyDay day : month.days)
         {
             current = MaxWindSpeed(day);
 
@@ -334,7 +334,7 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given day
-    public static WindSpeedDateTuple MaxWindSpeed(Day day)
+    public static WindSpeedDateTuple MaxWindSpeed(MyDay day)
     {
         WindSpeedDateTuple max = new WindSpeedDateTuple();
 
@@ -358,12 +358,12 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given year
-    public static WindSpeedDateTuple MinWindspeed(Year year)
+    public static WindSpeedDateTuple MinWindspeed(MyYear year)
     {
         WindSpeedDateTuple min = new WindSpeedDateTuple();
         WindSpeedDateTuple current;
 
-        for(myMonth month : year.months)
+        for(MyMonth month : year.months)
         {
             current = MaxWindSpeed(month);
 
@@ -384,12 +384,12 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given month
-    public static WindSpeedDateTuple MinWindSpeed(myMonth month)
+    public static WindSpeedDateTuple MinWindSpeed(MyMonth month)
     {
         WindSpeedDateTuple min = new WindSpeedDateTuple();
         WindSpeedDateTuple current;
 
-        for(Day day : month.days)
+        for(MyDay day : month.days)
         {
             current = MaxWindSpeed(day);
 
@@ -410,7 +410,7 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given day
-    public static WindSpeedDateTuple MinWindSpeed(Day day)
+    public static WindSpeedDateTuple MinWindSpeed(MyDay day)
     {
         WindSpeedDateTuple min = new WindSpeedDateTuple();
 
@@ -433,13 +433,13 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the prevailing wind direction
     */
     //Calculates and returns the prevailing wind direction over a given year
-    public static WindDirection PrevailingWindDirection(Year year)
+    public static WindDirection PrevailingWindDirection(MyYear year)
     {
         int windDirection[] = new int[16];
         int prevailingDirection;
         WindDirection result;
 
-        for(myMonth month : year.months)
+        for(MyMonth month : year.months)
         {
             prevailingDirection = PrevailingWindDirection(month).ordinal();
             windDirection[prevailingDirection]++;
@@ -457,13 +457,13 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the prevailing wind direction
     */
     //Calculates and returns the prevailing wind direction over a given month
-    public static WindDirection PrevailingWindDirection(myMonth month)
+    public static WindDirection PrevailingWindDirection(MyMonth month)
     {
         int windDirection[] = new int[16];
         int prevailingDirection;
         WindDirection result;
 
-        for(Day day : month.days)
+        for(MyDay day : month.days)
         {
             prevailingDirection = PrevailingWindDirection(day).ordinal();
             windDirection[prevailingDirection]++;
@@ -481,7 +481,7 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the prevailing wind direction
     */
     //Calculates and returns the prevailing wind direction over a given day
-    public static WindDirection PrevailingWindDirection(Day day)
+    public static WindDirection PrevailingWindDirection(MyDay day)
     {
         int windDirection[] = new int[16];
         WindDirection result;
@@ -503,11 +503,11 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the total rainfall
     */
     //Calculates and returns the total rainfall over a given year
-    public static float TotalRainfall(Year year)
+    public static float TotalRainfall(MyYear year)
     {
         float rainfall = 0;
 
-        for(myMonth month : year.months)
+        for(MyMonth month : year.months)
         {
             rainfall += TotalRainfall(month);
         }
@@ -522,11 +522,11 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the total rainfall
     */
     //Calculates and returns the total rainfall over a given month
-    public static float TotalRainfall(myMonth month)
+    public static float TotalRainfall(MyMonth month)
     {
         float rainfall = 0;
 
-        for(Day day : month.days)
+        for(MyDay day : month.days)
         {
             rainfall += TotalRainfall(day);
         }
@@ -541,7 +541,7 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the total rainfall
     */
     //Calculates and returns the total rainfall over a given day
-    public static float TotalRainfall(Day day)
+    public static float TotalRainfall(MyDay day)
     {
         float rainfall = 0;
 

@@ -6,18 +6,20 @@
 package weatherservice;
 
 import java.util.ArrayList;
+import static weatherservice.StatisticsCalculator.MeanTemperature;
 
 /**
  *
  * @author Alex
  */
-public class myMonth {
+public class MyMonth extends org.jfree.data.time.Month {
     public int monthOfYear;
     
-    public ArrayList<Day> days = new ArrayList<Day>();
+    public ArrayList<MyDay> days = new ArrayList<MyDay>();
     
-    myMonth(int monthNumber)
+    MyMonth(int monthNumber, int yearNumber)
     {
+        super(monthNumber, yearNumber);
         monthOfYear = monthNumber;
     }
 }
