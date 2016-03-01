@@ -158,8 +158,10 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="monthRadioButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="dayRadioButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="weekRadioButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="dayRadioButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -171,6 +173,7 @@
                               <Component id="yearRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="dayRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="monthRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="weekRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -201,6 +204,18 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Month"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="weekRadioButton">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="radioButtonGroup"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Week"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="weekRadioButtonActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -5,15 +5,23 @@
  */
 package weatherservice;
 
+import java.awt.Color;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.ui.RectangleInsets;
 
 /**
  *
@@ -31,47 +39,33 @@ public class WeatherServiceUI extends javax.swing.JFrame {
     
     private void setupChart(){        
         JFreeChart graph = ChartFactory.createTimeSeriesChart("Thing", "Days", "Temp", createDataset(), false, false, false);
+        graph.setBackgroundPaint(Color.white);
+
+        XYPlot plot = (XYPlot) graph.getPlot();
+        plot.setBackgroundPaint(Color.lightGray);
+        plot.setDomainGridlinePaint(Color.white);
+        plot.setRangeGridlinePaint(Color.white);
+        plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
+        plot.setDomainCrosshairVisible(true);
+        plot.setRangeCrosshairVisible(true);
+
+        XYItemRenderer r = plot.getRenderer();
+        if (r instanceof XYLineAndShapeRenderer) {
+            XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) r;
+            renderer.setBaseShapesVisible(true);
+            renderer.setBaseShapesFilled(true);
+            renderer.setDrawSeriesLineAsPath(true);
+        }
+
+        DateAxis axis = (DateAxis) plot.getDomainAxis();
+        axis.setDateFormatOverride(new SimpleDateFormat("MMM-yyyy"));
         ChartPanel chartPanel = new ChartPanel(graph);
+        chartPanel.setFillZoomRectangle(true);
+        chartPanel.setMouseWheelEnabled(true);
+        chartPanel.setSize(graphPanel.getSize());
         graphPanel.add(chartPanel);
-        graphPanel.setVisible(true);
+        graphPanel.getParent().validate();
     }
-    private static JFreeChart createChart(XYDataset dataset) {
-102
-103        JFreeChart chart = ChartFactory.createTimeSeriesChart(
-104            "Legal & General Unit Trust Prices",  // title
-105            "Date",             // x-axis label
-106            "Price Per Unit",   // y-axis label
-107            dataset,            // data
-108            true,               // create legend?
-109            true,               // generate tooltips?
-110            false               // generate URLs?
-111        );
-112
-113        chart.setBackgroundPaint(Color.white);
-114
-115        XYPlot plot = (XYPlot) chart.getPlot();
-116        plot.setBackgroundPaint(Color.lightGray);
-117        plot.setDomainGridlinePaint(Color.white);
-118        plot.setRangeGridlinePaint(Color.white);
-119        plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
-120        plot.setDomainCrosshairVisible(true);
-121        plot.setRangeCrosshairVisible(true);
-122
-123        XYItemRenderer r = plot.getRenderer();
-124        if (r instanceof XYLineAndShapeRenderer) {
-125            XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) r;
-126            renderer.setBaseShapesVisible(true);
-127            renderer.setBaseShapesFilled(true);
-128            renderer.setDrawSeriesLineAsPath(true);
-129        }
-130
-131        DateAxis axis = (DateAxis) plot.getDomainAxis();
-132        axis.setDateFormatOverride(new SimpleDateFormat("MMM-yyyy"));
-133
-134        return chart;
-135
-136    }
-    
     private static XYDataset createDataset() {
 
         TimeSeries s1 = new TimeSeries("L&G European Index Trust");
@@ -149,6 +143,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         yearRadioButton = new javax.swing.JRadioButton();
         dayRadioButton = new javax.swing.JRadioButton();
         monthRadioButton = new javax.swing.JRadioButton();
+        weekRadioButton = new javax.swing.JRadioButton();
         graphPanel = new javax.swing.JPanel();
         graphOptionsPanel = new javax.swing.JPanel();
         graphOptions = new javax.swing.JComboBox<>();
@@ -186,6 +181,15 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         radioButtonGroup.add(monthRadioButton);
         monthRadioButton.setText("Month");
 
+        radioButtonGroup.add(weekRadioButton);
+        weekRadioButton.setText("Week");
+        weekRadioButton.setToolTipText("");
+        weekRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                weekRadioButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout radioButtonPanelLayout = new javax.swing.GroupLayout(radioButtonPanel);
         radioButtonPanel.setLayout(radioButtonPanelLayout);
         radioButtonPanelLayout.setHorizontalGroup(
@@ -196,8 +200,10 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(monthRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(weekRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dayRadioButton)
-                .addContainerGap())
+                .addGap(205, 205, 205))
         );
         radioButtonPanelLayout.setVerticalGroup(
             radioButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +212,8 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                 .addGroup(radioButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yearRadioButton)
                     .addComponent(dayRadioButton)
-                    .addComponent(monthRadioButton))
+                    .addComponent(monthRadioButton)
+                    .addComponent(weekRadioButton))
                 .addContainerGap())
         );
 
@@ -221,7 +228,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        graphOptionsPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        graphOptionsPanel.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
         graphOptions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -336,6 +343,10 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         System.exit(1);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
+    private void weekRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weekRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_weekRadioButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -390,6 +401,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup radioButtonGroup;
     private javax.swing.JPanel radioButtonPanel;
     private javax.swing.JMenu statisticsMenu;
+    private javax.swing.JRadioButton weekRadioButton;
     private javax.swing.JRadioButton yearRadioButton;
     // End of variables declaration//GEN-END:variables
 }
