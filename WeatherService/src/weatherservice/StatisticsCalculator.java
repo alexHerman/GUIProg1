@@ -76,6 +76,7 @@ public class StatisticsCalculator
     public static TemperatureDateTuple MaxTemperature(MyYear year)
     {
         TemperatureDateTuple max = new TemperatureDateTuple();
+        max.temperature = -1000;
         TemperatureDateTuple current;
 
         for(MyMonth month : year.months)
@@ -102,6 +103,7 @@ public class StatisticsCalculator
     public static TemperatureDateTuple MaxTemperature(MyMonth month)
     {
         TemperatureDateTuple max = new TemperatureDateTuple();
+        max.temperature = -1000;
         TemperatureDateTuple current;
 
         for(MyDay day : month.days)
@@ -128,7 +130,7 @@ public class StatisticsCalculator
     public static TemperatureDateTuple MaxTemperature(MyDay day)
     {
         TemperatureDateTuple max = new TemperatureDateTuple();
-        max.temperature = -100;
+        max.temperature = -1000;
 
         for(DataPoint point : day.dataPoints)
         {
@@ -153,6 +155,7 @@ public class StatisticsCalculator
     public static TemperatureDateTuple MinTemperature(MyYear year)
     {
         TemperatureDateTuple min = new TemperatureDateTuple();
+	min.temperature = 1000;
         TemperatureDateTuple current;
 
         for(MyMonth month : year.months)
@@ -179,6 +182,7 @@ public class StatisticsCalculator
     public static TemperatureDateTuple MinTemperature(MyMonth month)
     {
         TemperatureDateTuple min = new TemperatureDateTuple();
+	min.temperature = 1000;
         TemperatureDateTuple current;
 
         for(MyDay day : month.days)
@@ -205,7 +209,7 @@ public class StatisticsCalculator
     public static TemperatureDateTuple MinTemperature(MyDay day)
     {
         TemperatureDateTuple min = new TemperatureDateTuple();
-        min.temperature = 1000000;
+        min.temperature = 1000;
 
         for(DataPoint point : day.dataPoints)
         {
@@ -287,6 +291,7 @@ public class StatisticsCalculator
     public static WindSpeedDateTuple MaxWindSpeed(MyYear year)
     {
         WindSpeedDateTuple max = new WindSpeedDateTuple();
+	max.windspeed = -1000;
         WindSpeedDateTuple current;
 
         for(MyMonth month : year.months)
@@ -313,6 +318,7 @@ public class StatisticsCalculator
     public static WindSpeedDateTuple MaxWindSpeed(MyMonth month)
     {
         WindSpeedDateTuple max = new WindSpeedDateTuple();
+	max.windspeed = -1000;
         WindSpeedDateTuple current;
 
         for(MyDay day : month.days)
@@ -339,6 +345,7 @@ public class StatisticsCalculator
     public static WindSpeedDateTuple MaxWindSpeed(MyDay day)
     {
         WindSpeedDateTuple max = new WindSpeedDateTuple();
+	max.windspeed = -1000;
 
         for(DataPoint point : day.dataPoints)
         {
@@ -363,6 +370,7 @@ public class StatisticsCalculator
     public static WindSpeedDateTuple MinWindspeed(MyYear year)
     {
         WindSpeedDateTuple min = new WindSpeedDateTuple();
+	min.windspeed = 1000;
         WindSpeedDateTuple current;
 
         for(MyMonth month : year.months)
@@ -389,6 +397,7 @@ public class StatisticsCalculator
     public static WindSpeedDateTuple MinWindSpeed(MyMonth month)
     {
         WindSpeedDateTuple min = new WindSpeedDateTuple();
+	min.windspeed = 1000;
         WindSpeedDateTuple current;
 
         for(MyDay day : month.days)
@@ -415,6 +424,7 @@ public class StatisticsCalculator
     public static WindSpeedDateTuple MinWindSpeed(MyDay day)
     {
         WindSpeedDateTuple min = new WindSpeedDateTuple();
+	min.windspeed = 1000;
 
         for(DataPoint point : day.dataPoints)
         {
