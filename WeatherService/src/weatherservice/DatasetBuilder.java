@@ -5,6 +5,7 @@
  */
 package weatherservice;
 
+import java.util.ArrayList;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
@@ -54,14 +55,42 @@ public class DatasetBuilder {
         {
             for (MyDay day : month.days)
             {
-                s1.add(day, StatisticsCalculator.MinTemperature(day).temperature);
-                s2.add(day, StatisticsCalculator.MaxTemperature(day).temperature);
+                for(DataPoint point : day.dataPoints)
+                {
+                    s1.add(point, point.temperature);
+                }
+                //s1.add(day, StatisticsCalculator.MinTemperature(day).temperature);
+                //s2.add(day, StatisticsCalculator.MaxTemperature(day).temperature);
+            }
+        }
+
+        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        //dataset.addSeries(s2);
+        dataset.addSeries(s1);
+
+        return dataset;
+   }
+    
+    public XYDataset createTempDataSet(ArrayList<MyYear> years) 
+    {
+        TimeSeries s1 = new TimeSeries("Temperature for All Data");
+        
+        for (MyYear year : years)
+        {
+            for (MyMonth month : year.months)
+            {
+                for (MyDay day : month.days)
+                {
+                    for(DataPoint point : day.dataPoints)
+                    {
+                        s1.addOrUpdate(point, point.temperature);
+                    }
+                }
             }
         }
 
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(s1);
-        dataset.addSeries(s2);
 
         return dataset;
    }
