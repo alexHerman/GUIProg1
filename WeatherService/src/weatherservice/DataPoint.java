@@ -6,13 +6,15 @@
 package weatherservice;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
  * @author Alex
  */
-public class DataPoint {
+public class DataPoint extends org.jfree.data.time.Day {
     public LocalDateTime date;
     
     public float temperature;
@@ -34,4 +36,13 @@ public class DataPoint {
     public float uvindex;
     
     public float rainfall;
+    
+    DataPoint(LocalDateTime date){
+        super(Date.from(date.atZone(ZoneId.systemDefault()).toInstant()));
+        this.date = date;
+    }
+
+    DataPoint() {
+        
+    }
 }

@@ -12,13 +12,14 @@ import java.util.LinkedList;
  *
  * @author Alex
  */
-public class Year {
-    public int yearNumber;
+public class MyDay extends org.jfree.data.time.Day {
+    public int dayOfMonth;
     
-    public ArrayList<myMonth> months = new ArrayList<myMonth>();
+    public ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
     
-    Year(int yearNumber)
+    MyDay (int dayOfMonth, int monthNumber, int yearNumber)
     {
-        this.yearNumber = yearNumber;
+        super(dayOfMonth, monthNumber, yearNumber);
+        this.dayOfMonth = dayOfMonth;
     }
 }
