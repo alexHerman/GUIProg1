@@ -15,7 +15,7 @@ import java.util.LinkedList;
 public class Year {
     public int yearNumber;
     
-    public ArrayList<Month> months = new ArrayList<Month>();
+    public ArrayList<myMonth> months = new ArrayList<myMonth>();
     
     Year(int yearNumber)
     {

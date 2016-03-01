@@ -11,12 +11,12 @@ import java.util.ArrayList;
  *
  * @author Alex
  */
-public class Month {
+public class myMonth {
     public int monthOfYear;
     
     public ArrayList<Day> days = new ArrayList<Day>();
     
-    Month(int monthNumber)
+    myMonth(int monthNumber)
     {
         monthOfYear = monthNumber;
     }

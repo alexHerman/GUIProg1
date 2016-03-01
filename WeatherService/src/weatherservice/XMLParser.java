@@ -172,14 +172,14 @@ public class XMLParser {
     private void InsertDataPoint(DataPoint newData)
     {
         Year foundYear = null;
-        Month foundMonth = null;
+        myMonth foundMonth = null;
         Day foundDay = null;
         for (Year year : years)
         {
             if (year.yearNumber == newData.date.getYear())
             {
                 foundYear = year;
-                for (Month month : year.months)
+                for (myMonth month : year.months)
                 {
                     if (month.monthOfYear == newData.date.getMonthValue())
                     {
@@ -204,7 +204,7 @@ public class XMLParser {
         
         if (foundMonth == null)
         {
-            foundMonth = new Month(newData.date.getMonthValue());
+            foundMonth = new myMonth(newData.date.getMonthValue());
             foundYear.months.add(foundMonth);
         }
         
