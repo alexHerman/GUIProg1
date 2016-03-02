@@ -110,7 +110,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         allDataRadioButton = new javax.swing.JRadioButton();
         graphPanel = new javax.swing.JPanel();
         graphOptionsPanel = new javax.swing.JPanel();
-        graphOptions = new javax.swing.JComboBox<String>();
+        graphOptions = new javax.swing.JComboBox<>();
         statsLabel = new javax.swing.JLabel();
         highLabel = new javax.swing.JLabel();
         highLabelValue = new javax.swing.JLabel();
@@ -138,8 +138,6 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         openMenuItem = new javax.swing.JMenuItem();
         fileMenuSeparator = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        statisticsMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Weather Service");
@@ -233,7 +231,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
 
         graphOptionsPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        graphOptions.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Temperature", "Humidity", "Barometer", "Wind Speed", "Wind Gust", "Wind Chill", "Heat Index", "UV Index", "Rainfall" }));
+        graphOptions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temperature", "Humidity", "Barometer", "Wind Speed", "Wind Gust", "Wind Chill", "Heat Index", "UV Index", "Rainfall" }));
         graphOptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goButtonActionPerformed(evt);
@@ -465,12 +463,6 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         fileMenu.add(exitMenuItem);
 
         mainMenuBar.add(fileMenu);
-
-        editMenu.setText("Edit");
-        mainMenuBar.add(editMenu);
-
-        statisticsMenu.setText("Statistics");
-        mainMenuBar.add(statisticsMenu);
 
         setJMenuBar(mainMenuBar);
 
@@ -887,7 +879,6 @@ public class WeatherServiceUI extends javax.swing.JFrame {
     private javax.swing.JLabel avgWindSpeedValue;
     private javax.swing.JSpinner datePicker;
     private javax.swing.JRadioButton dayRadioButton;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JPopupMenu.Separator fileMenuSeparator;
@@ -915,7 +906,6 @@ public class WeatherServiceUI extends javax.swing.JFrame {
     private javax.swing.JLabel rainfallLabel;
     private javax.swing.JLabel rainfallStatsLabel;
     private javax.swing.JLabel rainfallValue;
-    private javax.swing.JMenu statisticsMenu;
     private javax.swing.JLabel statsLabel;
     private javax.swing.JLabel windDirValue;
     private javax.swing.JLabel windDirectionLabel;
