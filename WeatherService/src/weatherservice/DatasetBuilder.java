@@ -34,11 +34,10 @@ public class DatasetBuilder {
         
         for (MyDay day : month.days)
         {
-            s1.add(day, StatisticsCalculator.MeanTemperature(day));
-            /*for (DataPoint point : day.dataPoints)
+            for (DataPoint point : day.dataPoints)
             {
                 s1.add(point, point.temperature);
-            }*/
+            }
         }
 
         TimeSeriesCollection dataset = new TimeSeriesCollection();
