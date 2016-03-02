@@ -1,5 +1,7 @@
 package weatherservice;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Austin Rotert
@@ -8,6 +10,24 @@ package weatherservice;
 //overloads of each calculation for different types of input (year, month, etc.)
 public class StatisticsCalculator
 {
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the mean temperature of
+    * @return Returns a floating point representing the average temperature
+    */
+    //Calculates and returns the average temperature over a given year
+    public static float MeanTemperature(ArrayList<MyYear> year)
+    {
+        float avg = 0;
+
+        for(MyYear i: year)
+        {
+            avg += MeanTemperature(i);
+        }
+
+        return avg / year.size();
+    }
     /**
     *
     * @author Austin Rotert
@@ -63,6 +83,33 @@ public class StatisticsCalculator
         }
 
         return avg / day.dataPoints.size();
+    }
+    
+     /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the max temperature of
+    * @return Returns a floating point representing the max temperature
+    */
+    //Returns a tuple with the highest temperature and the time it occurred
+    //over a given year
+    public static TemperatureDateTuple MaxTemperature(ArrayList<MyYear> year)
+    {
+        TemperatureDateTuple max = new TemperatureDateTuple();
+        max.temperature = -1000;
+        TemperatureDateTuple current;
+
+        for(MyYear i : year)
+        {
+            current = MaxTemperature(i);
+
+            if(current.temperature > max.temperature)
+            {
+                max = current;
+            }
+        }
+
+        return max;
     }
 
     /**
@@ -152,6 +199,33 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest temperature and the time it occurred
     //over a given year
+    public static TemperatureDateTuple MinTemperature(ArrayList<MyYear> year)
+    {
+        TemperatureDateTuple min = new TemperatureDateTuple();
+	min.temperature = 1000;
+        TemperatureDateTuple current;
+
+        for(MyYear i : year)
+        {
+            current = MaxTemperature(i);
+
+            if(current.temperature < min.temperature)
+            {
+                min = current;
+            }
+        }
+
+        return min;
+    }
+    
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the min temperature of
+    * @return Returns a floating point representing the min temperature
+    */
+    //Returns a tuple with the highest temperature and the time it occurred
+    //over a given year
     public static TemperatureDateTuple MinTemperature(MyYear year)
     {
         TemperatureDateTuple min = new TemperatureDateTuple();
@@ -230,6 +304,25 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the average wind speed
     */
     //Calculates and returns the average wind speed over a given year
+    public static float MeanWindSpeed(ArrayList<MyYear> year)
+    {
+        float avg = 0;
+
+        for(MyYear i : year)
+        {
+            avg += MeanWindSpeed(i);
+        }
+
+        return avg / year.size();
+    }
+    
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the average wind speed of
+    * @return Returns a floating point representing the average wind speed
+    */
+    //Calculates and returns the average wind speed over a given year
     public static float MeanWindSpeed(MyYear year)
     {
         float avg = 0;
@@ -278,6 +371,33 @@ public class StatisticsCalculator
         }
 
         return avg / day.dataPoints.size();
+    }
+    
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the max wind gust of
+    * @return Returns a floating point representing the max wind gust
+    */
+    //Returns a tuple with the highest wind speed and the time it occurred
+    //over a given year
+    public static WindSpeedDateTuple MaxWindSpeed(ArrayList<MyYear> year)
+    {
+        WindSpeedDateTuple max = new WindSpeedDateTuple();
+	max.windspeed = -1000;
+        WindSpeedDateTuple current;
+
+        for(MyYear i : year)
+        {
+            current = MaxWindSpeed(i);
+
+            if(current.windspeed > max.windspeed)
+            {
+                max = current;
+            }
+        }
+
+        return max;
     }
 
     /**
@@ -357,6 +477,33 @@ public class StatisticsCalculator
         }
 
         return max;
+    }
+    
+     /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the min wind gust of
+    * @return Returns a floating point representing the min wind gust
+    */
+    //Returns a tuple with the highest wind speed and the time it occurred
+    //over a given year
+    public static WindSpeedDateTuple MinWindspeed(ArrayList<MyYear> year)
+    {
+        WindSpeedDateTuple min = new WindSpeedDateTuple();
+	min.windspeed = 1000;
+        WindSpeedDateTuple current;
+
+        for(MyYear i : year)
+        {
+            current = MaxWindSpeed(i);
+
+            if(current.windspeed < min.windspeed)
+            {
+                min = current;
+            }
+        }
+
+        return min;
     }
     
     /**
@@ -445,6 +592,30 @@ public class StatisticsCalculator
     * @return Returns a floating point representing the prevailing wind direction
     */
     //Calculates and returns the prevailing wind direction over a given year
+    public static WindDirection PrevailingWindDirection(ArrayList<MyYear> year)
+    {
+        int windDirection[] = new int[16];
+        int prevailingDirection;
+        WindDirection result;
+
+        for(MyYear i: year)
+        {
+            prevailingDirection = PrevailingWindDirection(i).ordinal();
+            windDirection[prevailingDirection]++;
+        }
+        
+        result = FindWindDirectionMode(windDirection);
+
+        return result;
+    }
+    
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the prevailing wind direction of
+    * @return Returns a floating point representing the prevailing wind direction
+    */
+    //Calculates and returns the prevailing wind direction over a given year
     public static WindDirection PrevailingWindDirection(MyYear year)
     {
         int windDirection[] = new int[16];
@@ -506,6 +677,25 @@ public class StatisticsCalculator
         result = FindWindDirectionMode(windDirection);
 
         return result;
+    }
+    
+    /**
+    *
+    * @author Austin Rotert
+    * @param year Year object to calculate the total rainfall of
+    * @return Returns a floating point representing the total rainfall
+    */
+    //Calculates and returns the total rainfall over a given year
+    public static float TotalRainfall(ArrayList<MyYear> year)
+    {
+        float rainfall = 0;
+
+        for(MyYear i : year)
+        {
+            rainfall += TotalRainfall(i);
+        }
+
+        return rainfall;
     }
         
     /**
