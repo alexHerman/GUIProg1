@@ -1,8 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*******************************************************************************
+ * 
+ * Description - This is the main class of this program. The UI is all build
+ * within this class, and so is some small functionality. This program is used
+ * to display weather data in a GUI so that it can be more easily interpreted by
+ * a human. You must begin by opening the data files for the weather data. 
+ * Any number of files can be opened as many times as is desired. Once that is 
+ * done, the graph will show up displaying information for the selected amount
+ * of time and the selected measurement. Changing the window of time or the 
+ * selected measurement will update the graph, and so will clicking "Go" if you 
+ * have changed the date in the date picker. 
+ * 
+ * Author - Alex Herman, Evan Hammer, Austin Rotert
+ * 
+*******************************************************************************/
 package weatherservice;
 
 import java.awt.Color;
@@ -43,7 +53,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
     
     private void setupChart(){
         DatasetBuilder builder = new DatasetBuilder();
-        graph = ChartFactory.createTimeSeriesChart("Thing", "Time", "Temp", builder.createTempDataSet(parser.years), false, false, false);
+        graph = ChartFactory.createTimeSeriesChart("Temperature", "Time", "degrees F", builder.createTempDataSet(parser.years), false, false, false);
         graph.setBackgroundPaint(Color.white);
 
         XYPlot plot = (XYPlot) graph.getPlot();
