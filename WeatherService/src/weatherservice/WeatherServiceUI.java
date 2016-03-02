@@ -7,6 +7,8 @@ package weatherservice;
 
 import java.awt.Color;
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JFileChooser;
@@ -14,6 +16,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
@@ -43,6 +46,9 @@ public class WeatherServiceUI extends javax.swing.JFrame {
 
         XYPlot plot = (XYPlot) graph.getPlot();
         plot.setBackgroundPaint(Color.lightGray);
+        StandardXYToolTipGenerator g = new StandardXYToolTipGenerator(
+            StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
+            new SimpleDateFormat("d-MMM-yyyy"), new DecimalFormat("0.00"));
         plot.setDomainGridlinePaint(Color.white);
         plot.setRangeGridlinePaint(Color.white);
         plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
@@ -50,6 +56,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         plot.setRangeCrosshairVisible(true);
 
         XYItemRenderer r = plot.getRenderer();
+        r.setToolTipGenerator(g);
         if (r instanceof XYLineAndShapeRenderer) {
             XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) r;
             renderer.setBaseShapesVisible(true);
@@ -60,8 +67,8 @@ public class WeatherServiceUI extends javax.swing.JFrame {
 
         DateAxis axis = (DateAxis) plot.getDomainAxis();
         ChartPanel chartPanel = new ChartPanel(graph);
+        chartPanel.setInitialDelay(0);
         chartPanel.setFillZoomRectangle(true);
-        chartPanel.setMouseWheelEnabled(true);
         chartPanel.setSize(graphPanel.getSize());
         graphPanel.add(chartPanel);
         graphPanel.getParent().validate();
@@ -451,6 +458,8 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         //Set the graph to display an entire year from the current date
         DatasetBuilder builder = new DatasetBuilder();
         graph.getXYPlot().setDataset(builder.createTempDataSet(parser.years.get(0)));
+        ((XYLineAndShapeRenderer) graph.getXYPlot().getRenderer()).setBaseShapesVisible(true);
+
         scope = "Year";
     }//GEN-LAST:event_yearRadioButtonActionPerformed
 
@@ -458,6 +467,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         //Set the graph to display a single month
         DatasetBuilder builder = new DatasetBuilder();
         graph.getXYPlot().setDataset(builder.createTempDataSet(parser.years.get(0).months.get(0)));
+        ((XYLineAndShapeRenderer) graph.getXYPlot().getRenderer()).setBaseShapesVisible(true);
         scope = "Month";
     }//GEN-LAST:event_monthRadioButtonActionPerformed
 
@@ -465,6 +475,8 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         //Set the graph to display all of the data
         DatasetBuilder builder = new DatasetBuilder();
         graph.getXYPlot().setDataset(builder.createTempDataSet(parser.years));
+        ((XYLineAndShapeRenderer) graph.getXYPlot().getRenderer()).setBaseShapesVisible(false);
+
         scope = "All";
     }//GEN-LAST:event_allDataRadioButtonActionPerformed
 
@@ -472,6 +484,8 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         //Display a single day of data
         DatasetBuilder builder = new DatasetBuilder();
         graph.getXYPlot().setDataset(builder.createTempDataSet(parser.years.get(0).months.get(0).days.get(0)));
+        ((XYLineAndShapeRenderer) graph.getXYPlot().getRenderer()).setBaseShapesVisible(true);
+
         scope = "Day";
     }//GEN-LAST:event_dayRadioButtonActionPerformed
 
@@ -516,19 +530,55 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         Calendar calDate = Calendar.getInstance();
         calDate.setTime(date);
         int year = calDate.get(Calendar.YEAR);
-        int month = calDate.get(Calendar.MONTH);
+        int month = calDate.get(Calendar.MONTH) + 1;
         int day = calDate.get(Calendar.DAY_OF_MONTH);
         switch (scope) {
             case "All":
                 return;
             case "Year":
                 System.out.println("year thing");
+                for(MyYear y: parser.years){
+                    if(y.yearNumber == year){
+                        DatasetBuilder builder = new DatasetBuilder();
+                        graph.getXYPlot().setDataset(builder.createTempDataSet(y));
+                        break;
+                    }
+                }
                 break;
             case "Month":
                 System.out.println("month thing");
+                for(MyYear y: parser.years){
+                    if(y.yearNumber == year){
+                        for(MyMonth m: y.months){
+                            if(m.monthOfYear == month){
+                                DatasetBuilder builder = new DatasetBuilder();
+                                graph.getXYPlot().setDataset(builder.createTempDataSet(m));
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
                 break;
             case "Day":
                 System.out.println("day thing");
+                for(MyYear y: parser.years){
+                    if(y.yearNumber == year){
+                        for(MyMonth m: y.months){
+                            if(m.monthOfYear == month){
+                                for(MyDay d: m.days){
+                                    if(d.dayOfMonth == day){
+                                        DatasetBuilder builder = new DatasetBuilder();
+                                        graph.getXYPlot().setDataset(builder.createTempDataSet(d));
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
                 break;
             default:
                 return;
