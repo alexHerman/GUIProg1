@@ -580,7 +580,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                 case "Rainfall":
                     return builder.createRainFallDataSet(data);
                 default: 
-                    System.out.println("Something");
+                    return builder.createRainFallDataSet(data);
             }
         }
         else if (scope == "Year")
@@ -606,7 +606,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                 case "Rainfall":
                     return builder.createRainFallDataSet(data);
                 default: 
-                    System.out.println("Something");
+                    return builder.createRainFallDataSet(data);
             }
         }
         else if (scope == "Month")
@@ -632,7 +632,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                 case "Rainfall":
                     return builder.createRainFallDataSet(data);
                 default: 
-                    System.out.println("Something");
+                    return builder.createRainFallDataSet(data);
             }
         }
         else if (scope == "Day")
@@ -658,7 +658,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                 case "Rainfall":
                     return builder.createRainFallDataSet(data);
                 default: 
-                    System.out.println("Something");
+                    return builder.createRainFallDataSet(data);
             }
         }
         
@@ -834,7 +834,6 @@ public class WeatherServiceUI extends javax.swing.JFrame {
             default:
                 return;
         }
-        System.out.println(month + "/" + day + "/" + year);
     }
     /**
      * @param args the command line arguments
