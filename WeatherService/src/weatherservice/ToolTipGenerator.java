@@ -19,18 +19,20 @@ import org.jfree.data.xy.XYDataset;
  */
 public class ToolTipGenerator implements XYToolTipGenerator
 {
-
 	@Override
 	public String generateToolTip(XYDataset dataSet, int series, int item)
 	{
+		//Create correct classes from our data
 		TimeSeriesCollection collection = (TimeSeriesCollection)dataSet;
 		TimeSeries timeSeries = collection.getSeries(series);
 		TimePeriod timePeriod = timeSeries.getTimePeriod(item);
 		
+		//Get the date parsed correctly
 		String string = timePeriod.toString();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd kk:mm:ss zzz yyyy");
 		LocalDateTime dateTime = LocalDateTime.parse(string, formatter);
 
+		//Store chunks of the date off to the side
 		int year = dateTime.getYear();
 		int month = dateTime.getMonthValue();
 		int day = dateTime.getDayOfMonth();
@@ -39,7 +41,7 @@ public class ToolTipGenerator implements XYToolTipGenerator
 		int second = dateTime.getSecond();
 		
 		DataPoint tooltipPoint = null;
-		
+		//Loop through and see if we can find the correct date
 		for(MyYear years : XMLParser.years)
 		{
 			if(years.yearNumber == year)
@@ -69,6 +71,8 @@ public class ToolTipGenerator implements XYToolTipGenerator
 			}
 		}
 		
+		//If we found a date, generate a tooltip for the return, otherwise
+		//just return null
 		String result = null;
 		if(tooltipPoint != null)
 		{
@@ -82,7 +86,7 @@ public class ToolTipGenerator implements XYToolTipGenerator
 	{
 		String toolTip = "";
 		
-		toolTip += "<html>" + point.date + "<br />";
+		toolTip += "<html>" + point.date.format(DateTimeFormatter.ofPattern("MM/dd/yyyy kk:mm:ss")) + "<br />";
 		toolTip += "Temperature: " + point.temperature + " degrees F<br />";
 		toolTip += "Humidity: " + point.humidity + " % <br />";
 		toolTip += "Barometer: " + point.barometer + " inHg <br />";
