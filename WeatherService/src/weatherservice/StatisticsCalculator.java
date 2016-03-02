@@ -216,7 +216,7 @@ public class StatisticsCalculator
 
         for(MyYear i : year)
         {
-            current = MaxTemperature(i);
+            current = MinTemperature(i);
 
             if(current.temperature < min.temperature)
             {
