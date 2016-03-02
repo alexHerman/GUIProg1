@@ -243,7 +243,7 @@ public class StatisticsCalculator
 
         for(MyMonth month : year.months)
         {
-            current = MaxTemperature(month);
+            current = MinTemperature(month);
 
             if(current.temperature < min.temperature)
             {
@@ -270,7 +270,7 @@ public class StatisticsCalculator
 
         for(MyDay day : month.days)
         {
-            current = MaxTemperature(day);
+            current = MinTemperature(day);
 
             if(current.temperature < min.temperature)
             {
