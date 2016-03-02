@@ -523,7 +523,7 @@ public class StatisticsCalculator
     */
     //Returns a tuple with the highest wind speed and the time it occurred
     //over a given year
-    public static WindSpeedDateTuple MinWindspeed(MyYear year)
+    public static WindSpeedDateTuple MinWindSpeed(MyYear year)
     {
         WindSpeedDateTuple min = new WindSpeedDateTuple();
 	min.windspeed = 1000;
