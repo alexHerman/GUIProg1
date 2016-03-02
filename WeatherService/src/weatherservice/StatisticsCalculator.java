@@ -1,3 +1,12 @@
+/*******************************************************************************
+*
+* Description - This class is used to calculate statistics for different windows
+* of data and for different measurements. It has overloaded functions for all
+* of the necessary calculations for the different time periods. 
+* 
+* Author - Austin Rotert
+*******************************************************************************/
+
 package weatherservice;
 
 import java.util.ArrayList;
@@ -13,7 +22,7 @@ public class StatisticsCalculator
     /**
     *
     * @author Austin Rotert
-    * @param year Year object to calculate the mean temperature of
+    * @param year List of Year objects to calculate the mean temperature of
     * @return Returns a floating point representing the average temperature
     */
     //Calculates and returns the average temperature over a given year
@@ -88,7 +97,7 @@ public class StatisticsCalculator
      /**
     *
     * @author Austin Rotert
-    * @param year Year object to calculate the max temperature of
+    * @param year List of Year objects to calculate the max temperature of
     * @return Returns a floating point representing the max temperature
     */
     //Returns a tuple with the highest temperature and the time it occurred
@@ -194,7 +203,7 @@ public class StatisticsCalculator
     /**
     *
     * @author Austin Rotert
-    * @param year Year object to calculate the min temperature of
+    * @param year List of Year objects to calculate the min temperature of
     * @return Returns a floating point representing the min temperature
     */
     //Returns a tuple with the highest temperature and the time it occurred
@@ -300,7 +309,7 @@ public class StatisticsCalculator
     /**
     *
     * @author Austin Rotert
-    * @param year Year object to calculate the average wind speed of
+    * @param year List of Year objects to calculate the average wind speed of
     * @return Returns a floating point representing the average wind speed
     */
     //Calculates and returns the average wind speed over a given year
@@ -376,7 +385,7 @@ public class StatisticsCalculator
     /**
     *
     * @author Austin Rotert
-    * @param year Year object to calculate the max wind gust of
+    * @param year List of Year objects to calculate the max wind gust of
     * @return Returns a floating point representing the max wind gust
     */
     //Returns a tuple with the highest wind speed and the time it occurred
@@ -482,7 +491,7 @@ public class StatisticsCalculator
      /**
     *
     * @author Austin Rotert
-    * @param year Year object to calculate the min wind gust of
+    * @param year List of Year objects to calculate the min wind gust of
     * @return Returns a floating point representing the min wind gust
     */
     //Returns a tuple with the highest wind speed and the time it occurred
@@ -588,7 +597,7 @@ public class StatisticsCalculator
     /**
     *
     * @author Austin Rotert
-    * @param year Year object to calculate the prevailing wind direction of
+    * @param year List of Year objects to calculate the prevailing wind direction of
     * @return Returns a floating point representing the prevailing wind direction
     */
     //Calculates and returns the prevailing wind direction over a given year
@@ -683,7 +692,7 @@ public class StatisticsCalculator
     /**
     *
     * @author Austin Rotert
-    * @param year Year object to calculate the total rainfall of
+    * @param year List of Year objects to calculate the total rainfall of
     * @return Returns a floating point representing the total rainfall
     */
     //Calculates and returns the total rainfall over a given year

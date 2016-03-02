@@ -1,8 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*******************************************************************************
+*
+* Description - This class represents the data for a single day of data. 
+* 
+* Author - Alex Herman
+*******************************************************************************/
 package weatherservice;
 
 import java.util.ArrayList;

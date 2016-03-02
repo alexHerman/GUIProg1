@@ -1,6 +1,13 @@
-/*Source: 
-http://stackoverflow.com/questions/19589231/can-i-iterate-through-nodelist-using-foreach-in-java
-*/
+/*******************************************************************************
+*
+* Description - This class is used to make a list of elements iterable using
+* the foreach construct in java. It creates an abstract list and implements a 
+* interface that makes the foreach construct recognize it. 
+* 
+* Source - http://stackoverflow.com/questions/19589231/can-i-iterate-through-nodelist-using-foreach-in-java
+* 
+* Author - Holger
+*******************************************************************************/
 
 package weatherservice;
 
