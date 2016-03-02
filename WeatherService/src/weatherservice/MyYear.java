@@ -1,8 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*******************************************************************************
+*
+* Description - This class represents a single year of data taken from the xml
+* files. 
+* 
+* Author - Alex Herman
+*******************************************************************************/
 package weatherservice;
 
 import java.util.ArrayList;

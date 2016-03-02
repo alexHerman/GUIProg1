@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class represents the measurements taken from a single reading of the 
+ * measurement device. It also extends a class so that it can be used by 
+ * JFreeChart.
+ *
+ * Author: Alex Herman
  */
 package weatherservice;
 
@@ -9,10 +11,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-/**
- *
- * @author Alex
- */
 public class DataPoint extends org.jfree.data.time.Minute {
     public LocalDateTime date;
     

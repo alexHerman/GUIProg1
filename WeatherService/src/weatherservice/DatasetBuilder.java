@@ -1,8 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*******************************************************************************
+*
+* Description -  This class is used to format the data read in from the xml 
+* files into a format that can be read by the JFreeChart graph. It has 
+* overloaded functions for each window of data for each measurement that can be
+* graphed.
+* 
+* Author - Alex Herman
+*******************************************************************************/
 package weatherservice;
 
 import java.util.ArrayList;
@@ -10,10 +14,6 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
-/**
- *
- * @author Alex
- */
 public class DatasetBuilder {
     public XYDataset createTempDataSet(MyDay day) {
         TimeSeries s1 = new TimeSeries("Temperature for Day " + day.dayOfMonth);

@@ -1,8 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*******************************************************************************
+*
+* Description - This class is used to parse xml files into data structures that
+* can be used by this program. It is capable of parsing a file, a list of files,
+* or an entire directory of files. All of the data that it parses is then stored
+* into a static list of Years in this class. 
+* 
+* Author - Alex Herman & Evan Hammer
+*******************************************************************************/
+
 package weatherservice;
 
 import org.w3c.dom.*;
