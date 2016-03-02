@@ -39,16 +39,19 @@ public class WeatherServiceUI extends javax.swing.JFrame {
     }
     
     private void setupChart(){
-        parser.ParseDirectory("/Users/Hamm3r/dev/GUIProg1/Data");
+        parser.ParseDirectory("/home/arotert/Dropbox/School/CSC/Prog1/GithubRepo/GUIProg1/Data");
         DatasetBuilder builder = new DatasetBuilder();
         graph = ChartFactory.createTimeSeriesChart("Thing", "Days", "Temp", builder.createTempDataSet(parser.years), false, false, false);
         graph.setBackgroundPaint(Color.white);
 
         XYPlot plot = (XYPlot) graph.getPlot();
         plot.setBackgroundPaint(Color.lightGray);
-        StandardXYToolTipGenerator g = new StandardXYToolTipGenerator(
-            StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
-            new SimpleDateFormat("d-MMM-yyyy"), new DecimalFormat("0.00"));
+	
+        //StandardXYToolTipGenerator g = new StandardXYToolTipGenerator(
+        //    StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
+        //    new SimpleDateFormat("d-MMM-yyyy"), new DecimalFormat("0.00"));
+		ToolTipGenerator g = new ToolTipGenerator();
+	
         plot.setDomainGridlinePaint(Color.white);
         plot.setRangeGridlinePaint(Color.white);
         plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
