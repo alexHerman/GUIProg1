@@ -20,7 +20,7 @@ public class DatasetBuilder {
         
         for (DataPoint point : day.dataPoints)
         {
-            s1.add(point, point.temperature);
+            s1.addOrUpdate(point, point.temperature);
         }
 
         TimeSeriesCollection dataset = new TimeSeriesCollection();
@@ -36,7 +36,7 @@ public class DatasetBuilder {
         {
             for (DataPoint point : day.dataPoints)
             {
-                s1.add(point, point.temperature);
+                s1.addOrUpdate(point, point.temperature);
             }
         }
 
@@ -56,10 +56,10 @@ public class DatasetBuilder {
             {
                 for(DataPoint point : day.dataPoints)
                 {
-                    s1.add(point, point.temperature);
+                    s1.addOrUpdate(point, point.temperature);
                 }
-                //s1.add(day, StatisticsCalculator.MinTemperature(day).temperature);
-                //s2.add(day, StatisticsCalculator.MaxTemperature(day).temperature);
+                //s1.addOrUpdate(day, StatisticsCalculator.MinTemperature(day).temperature);
+                //s2.addOrUpdate(day, StatisticsCalculator.MaxTemperature(day).temperature);
             }
         }
 
