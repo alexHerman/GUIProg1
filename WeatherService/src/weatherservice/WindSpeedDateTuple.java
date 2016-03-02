@@ -1,8 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*******************************************************************************
+*
+* Description - This class represents a tuple of a date and a wind speed
+* measurement. It is used for statistics calculations when the date of a 
+* statistic needs to be displayed along with the value.
+* 
+* Author - Austin Rotert
+*******************************************************************************/
 package weatherservice;
 
 import java.time.LocalDateTime;
