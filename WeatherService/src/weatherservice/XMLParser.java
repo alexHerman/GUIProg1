@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import static weatherservice.XmlUtil.asList;
 
 /**
@@ -21,6 +22,8 @@ import static weatherservice.XmlUtil.asList;
  */
 public class XMLParser {
     public ArrayList<MyYear> years = new ArrayList<MyYear>();
+    public static Calendar maxDate = null;
+    public static Calendar minDate = null;
     
     public void ParseFiles(String[] fileNames)
     {
@@ -64,7 +67,13 @@ public class XMLParser {
             ParseFile(file.getPath());
         }
     }
-    
+    private Calendar convertLocalDateToCalendar(LocalDateTime date){
+        Calendar calDate = Calendar.getInstance();
+        calDate.set(Calendar.YEAR, date.getYear());
+        calDate.set(Calendar.MONTH, date.getMonthValue()-1);
+        calDate.set(Calendar.DAY_OF_MONTH, date.getDayOfMonth());
+        return calDate;
+    }
     private DataPoint CreateDataPoint(Element dataPoint)
     {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(" MM/dd/yy ");
@@ -78,7 +87,24 @@ public class XMLParser {
                 dataPoint.getElementsByTagName("time").item(0).getTextContent()));
             
             newData = new DataPoint(newDate);
+            Calendar calDate = convertLocalDateToCalendar(newDate);
+            if(maxDate == null){
+                maxDate = calDate;
+            }else{
+                if(maxDate.before(calDate)){
+                    maxDate = calDate;
+                }
+            }
+            if(minDate == null){
+                minDate = calDate;
+            }else{
+                
+                if(minDate.after(calDate)){
+                    minDate = calDate;
+                }
+            }
         }
+        
         else{
             newData = new DataPoint();
         }

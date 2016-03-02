@@ -6,12 +6,15 @@
 package weatherservice;
 
 import java.awt.Color;
+import org.jfree.data.xy.XYDataset;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JFileChooser;
+import javax.swing.SpinnerDateModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -20,6 +23,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.ui.RectangleInsets;
 
 /**
@@ -35,11 +39,9 @@ public class WeatherServiceUI extends javax.swing.JFrame {
      */
     public WeatherServiceUI() {
         initComponents();
-        setupChart();
     }
     
     private void setupChart(){
-        parser.ParseDirectory("/Users/Hamm3r/dev/GUIProg1/Data");
         DatasetBuilder builder = new DatasetBuilder();
         graph = ChartFactory.createTimeSeriesChart("Thing", "Days", "Temp", builder.createTempDataSet(parser.years), false, false, false);
         graph.setBackgroundPaint(Color.white);
@@ -95,7 +97,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         allDataRadioButton = new javax.swing.JRadioButton();
         graphPanel = new javax.swing.JPanel();
         graphOptionsPanel = new javax.swing.JPanel();
-        graphOptions = new javax.swing.JComboBox<>();
+        graphOptions = new javax.swing.JComboBox<String>();
         statsLabel = new javax.swing.JLabel();
         highLabel = new javax.swing.JLabel();
         highLabelValue = new javax.swing.JLabel();
@@ -111,6 +113,11 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         rainfallStatsLabel = new javax.swing.JLabel();
         rainfallLabel = new javax.swing.JLabel();
         rainfallValue = new javax.swing.JLabel();
+        averageWindLabel = new javax.swing.JLabel();
+        avgWindSpeedValue = new javax.swing.JLabel();
+        highTempDateValue = new javax.swing.JLabel();
+        lowTempDateValue = new javax.swing.JLabel();
+        maxWindDateValue = new javax.swing.JLabel();
         datePicker = new javax.swing.JSpinner();
         goButton = new javax.swing.JButton();
         mainMenuBar = new javax.swing.JMenuBar();
@@ -122,6 +129,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         statisticsMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Weather Service");
 
         mainToolbar.setFloatable(false);
         mainToolbar.setRollover(true);
@@ -142,7 +150,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         yearRadioButton.setText("Year");
         yearRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yearRadioButtonActionPerformed(evt);
+                goButtonActionPerformed(evt);
             }
         });
 
@@ -150,7 +158,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         dayRadioButton.setText("Day");
         dayRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dayRadioButtonActionPerformed(evt);
+                goButtonActionPerformed(evt);
             }
         });
 
@@ -158,7 +166,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         monthRadioButton.setText("Month");
         monthRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                monthRadioButtonActionPerformed(evt);
+                goButtonActionPerformed(evt);
             }
         });
 
@@ -167,7 +175,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         allDataRadioButton.setText("All Data");
         allDataRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                allDataRadioButtonActionPerformed(evt);
+                goButtonActionPerformed(evt);
             }
         });
 
@@ -202,19 +210,19 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         graphPanel.setLayout(graphPanelLayout);
         graphPanelLayout.setHorizontalGroup(
             graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 853, Short.MAX_VALUE)
+            .addGap(0, 858, Short.MAX_VALUE)
         );
         graphPanelLayout.setVerticalGroup(
             graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGap(0, 517, Short.MAX_VALUE)
         );
 
         graphOptionsPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        graphOptions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temperature", "Humidity", "Barometer", "Wind Speed", "Wind Gust", "Wind Chill", "Heat Index", "UV Index", "Rainfall" }));
+        graphOptions.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Temperature", "Humidity", "Barometer", "Wind Speed", "Wind Gust", "Wind Chill", "Heat Index", "UV Index", "Rainfall" }));
         graphOptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                graphOptionsActionPerformed(evt);
+                goButtonActionPerformed(evt);
             }
         });
 
@@ -234,7 +242,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
 
         windStatsLabel.setText("Wind Statistics: ");
 
-        maxWindLabel.setText("Max Wind Speed:");
+        maxWindLabel.setText("Max Wind Gust:");
 
         windDirectionLabel.setText("Prevailing Wind Direction:");
 
@@ -248,6 +256,16 @@ public class WeatherServiceUI extends javax.swing.JFrame {
 
         rainfallValue.setText("10 in");
 
+        averageWindLabel.setText("Average Wind Speed");
+
+        avgWindSpeedValue.setText("0");
+
+        highTempDateValue.setText("1/1/2016");
+
+        lowTempDateValue.setText("1/1/2016");
+
+        maxWindDateValue.setText("1/1/2016");
+
         javax.swing.GroupLayout graphOptionsPanelLayout = new javax.swing.GroupLayout(graphOptionsPanel);
         graphOptionsPanel.setLayout(graphOptionsPanelLayout);
         graphOptionsPanelLayout.setHorizontalGroup(
@@ -255,50 +273,59 @@ public class WeatherServiceUI extends javax.swing.JFrame {
             .addGroup(graphOptionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(graphOptions, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, graphOptionsPanelLayout.createSequentialGroup()
+                        .addGap(0, 167, Short.MAX_VALUE)
+                        .addComponent(avgLabelValue)
+                        .addGap(8, 8, 8))
                     .addGroup(graphOptionsPanelLayout.createSequentialGroup()
                         .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(graphOptions, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(statsLabel)
+                            .addComponent(windStatsLabel)
+                            .addComponent(rainfallStatsLabel))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(graphOptionsPanelLayout.createSequentialGroup()
-                                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(statsLabel)
-                                    .addGroup(graphOptionsPanelLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(avgLabel)
-                                            .addComponent(highLabel)
-                                            .addComponent(lowLabel))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, graphOptionsPanelLayout.createSequentialGroup()
-                        .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, graphOptionsPanelLayout.createSequentialGroup()
-                                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(windStatsLabel)
-                                    .addComponent(rainfallStatsLabel))
+                                .addComponent(averageWindLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(avgWindSpeedValue))
+                            .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                                .addComponent(maxWindLabel)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, graphOptionsPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(graphOptionsPanelLayout.createSequentialGroup()
-                                        .addComponent(maxWindLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(windSpeedValue))
-                                    .addGroup(graphOptionsPanelLayout.createSequentialGroup()
-                                        .addComponent(windDirectionLabel)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(windDirValue)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(graphOptionsPanelLayout.createSequentialGroup()
-                                        .addComponent(rainfallLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(rainfallValue))))
                             .addGroup(graphOptionsPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(rainfallLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rainfallValue))
+                            .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                                .addComponent(windDirectionLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(windDirValue)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, graphOptionsPanelLayout.createSequentialGroup()
+                        .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
                                 .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lowLabelValue, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(highLabelValue)
-                                    .addComponent(avgLabelValue))))
-                        .addGap(18, 18, 18))))
+                                    .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(avgLabel)
+                                        .addComponent(highLabel)
+                                        .addComponent(lowLabel))
+                                    .addComponent(lowLabelValue, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(29, 29, 29))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, graphOptionsPanelLayout.createSequentialGroup()
+                                .addComponent(windSpeedValue)
+                                .addGap(18, 18, 18)))
+                        .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(maxWindDateValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(highTempDateValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lowTempDateValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(8, 8, 8)))))
+                .addContainerGap())
         );
         graphOptionsPanelLayout.setVerticalGroup(
             graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,22 +336,35 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                 .addComponent(statsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(highLabel)
-                    .addComponent(highLabelValue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lowLabel)
-                    .addComponent(lowLabelValue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(avgLabel)
                     .addComponent(avgLabelValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(highLabel)
+                .addGap(3, 3, 3)
+                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(highLabelValue, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(highTempDateValue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lowLabel)
+                .addGap(1, 1, 1)
+                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lowLabelValue)
+                    .addComponent(lowTempDateValue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(windStatsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(maxWindLabel)
-                    .addComponent(windSpeedValue))
+                    .addComponent(averageWindLabel)
+                    .addComponent(avgWindSpeedValue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(maxWindLabel)
+                .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(graphOptionsPanelLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(maxWindDateValue))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, graphOptionsPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(windSpeedValue)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(graphOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(windDirectionLabel)
@@ -385,6 +425,8 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        datePicker.getAccessibleContext().setAccessibleDescription("");
+
         mainScrollPane.setViewportView(mainPanel);
 
         fileMenu.setText("File");
@@ -431,7 +473,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(mainToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainScrollPane)
+                .addComponent(mainScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
                 .addGap(22, 22, 22))
         );
 
@@ -444,9 +486,28 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         openFile.setMultiSelectionEnabled(true);
         openFile.showOpenDialog(this);
         File inputFile[] = openFile.getSelectedFiles();
+        
+        if (graph == null)
+            setupChart();
+        
         for(File i : inputFile){
             parser.ParseFile(i.getAbsolutePath());
         }
+        XMLParser.minDate.add(Calendar.DAY_OF_MONTH, -1);
+        SpinnerDateModel model = new SpinnerDateModel();
+        model.setStart(XMLParser.minDate.getTime());
+        model.setEnd(XMLParser.maxDate.getTime());
+        XMLParser.minDate.add(Calendar.DAY_OF_MONTH, 1);
+        model.setValue(XMLParser.minDate.getTime());
+        model.setCalendarField(Calendar.DAY_OF_MONTH);
+        
+        datePicker.setModel(model);
+        datePicker.setEditor(new javax.swing.JSpinner.DateEditor(datePicker, "MM/dd/yy"));
+        repaint();
+        pack();
+   
+        datePicker.setValue(XMLParser.minDate.getTime());
+        refreshGraph();
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
@@ -454,93 +515,155 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         System.exit(1);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void yearRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearRadioButtonActionPerformed
-        //Set the graph to display an entire year from the current date
+    private XYDataset buildDataSet(Object obj, String option)
+    {
         DatasetBuilder builder = new DatasetBuilder();
-        graph.getXYPlot().setDataset(builder.createTempDataSet(parser.years.get(0)));
-        ((XYLineAndShapeRenderer) graph.getXYPlot().getRenderer()).setBaseShapesVisible(true);
-
-        scope = "Year";
-    }//GEN-LAST:event_yearRadioButtonActionPerformed
-
-    private void monthRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthRadioButtonActionPerformed
-        //Set the graph to display a single month
-        DatasetBuilder builder = new DatasetBuilder();
-        graph.getXYPlot().setDataset(builder.createTempDataSet(parser.years.get(0).months.get(0)));
-        ((XYLineAndShapeRenderer) graph.getXYPlot().getRenderer()).setBaseShapesVisible(true);
-        scope = "Month";
-    }//GEN-LAST:event_monthRadioButtonActionPerformed
-
-    private void allDataRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allDataRadioButtonActionPerformed
-        //Set the graph to display all of the data
-        DatasetBuilder builder = new DatasetBuilder();
-        graph.getXYPlot().setDataset(builder.createTempDataSet(parser.years));
-        ((XYLineAndShapeRenderer) graph.getXYPlot().getRenderer()).setBaseShapesVisible(false);
-
-        scope = "All";
-    }//GEN-LAST:event_allDataRadioButtonActionPerformed
-
-    private void dayRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayRadioButtonActionPerformed
-        //Display a single day of data
-        DatasetBuilder builder = new DatasetBuilder();
-        graph.getXYPlot().setDataset(builder.createTempDataSet(parser.years.get(0).months.get(0).days.get(0)));
-        ((XYLineAndShapeRenderer) graph.getXYPlot().getRenderer()).setBaseShapesVisible(true);
-
-        scope = "Day";
-    }//GEN-LAST:event_dayRadioButtonActionPerformed
-
-    private void graphOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graphOptionsActionPerformed
-        //Get the selected item and then display that information oin the graph
-        String option = (String) graphOptions.getSelectedItem();
-        switch(option){
-            case "Temperature": 
-                System.out.println("In Temperature");
-                break;
-            case "Humidity":
-                System.out.println("In Humidity");
-                break;
-            case "Barometer":
-                System.out.println("In Barometer");
-                break;
-            case "Wind Speed":
-                System.out.println("In Wind Speed");
-                break;
-            case "Wind Gust":
-                System.out.println("In Wind Gust");
-                break;
-            case "Wind Chill":
-                System.out.println("In Wind Chill");
-                break;
-            case "Heat Index":
-                System.out.println("In Heat Index");
-                break;
-            case "UV Index":
-                System.out.println("In UV Index");
-                break;
-            case "Rainfall":
-                System.out.println("In Rainfall");
-                break;
-            default: 
-                System.out.println("Something");
+        if (scope == "All")
+        {
+            ArrayList<MyYear> data = (ArrayList<MyYear>) obj;
+            switch(option){
+                case "Temperature": 
+                    return builder.createTempDataSet(data);
+                case "Humidity":
+                    return builder.createHumidityDataSet(data);
+                case "Barometer":
+                    return builder.createBarometerDataSet(data);
+                case "Wind Speed":
+                    return builder.createWindSpeedDataSet(data);
+                case "Wind Gust":
+                    return builder.createWindGustDataSet(data);
+                case "Wind Chill":
+                    return builder.createWindChillDataSet(data);
+                case "Heat Index":
+                    return builder.createHeatIndexDataSet(data);
+                case "UV Index":
+                    return builder.createUVIndexDataSet(data);
+                case "Rainfall":
+                    return builder.createRainFallDataSet(data);
+                default: 
+                    System.out.println("Something");
+            }
         }
-    }//GEN-LAST:event_graphOptionsActionPerformed
-
+        else if (scope == "Year")
+        {
+            MyYear data = (MyYear) obj;
+            switch(option){
+                case "Temperature": 
+                    return builder.createTempDataSet(data);
+                case "Humidity":
+                    return builder.createHumidityDataSet(data);
+                case "Barometer":
+                    return builder.createBarometerDataSet(data);
+                case "Wind Speed":
+                    return builder.createWindSpeedDataSet(data);
+                case "Wind Gust":
+                    return builder.createWindGustDataSet(data);
+                case "Wind Chill":
+                    return builder.createWindChillDataSet(data);
+                case "Heat Index":
+                    return builder.createHeatIndexDataSet(data);
+                case "UV Index":
+                    return builder.createUVIndexDataSet(data);
+                case "Rainfall":
+                    return builder.createRainFallDataSet(data);
+                default: 
+                    System.out.println("Something");
+            }
+        }
+        else if (scope == "Month")
+        {
+            MyMonth data = (MyMonth) obj;
+            switch(option){
+                case "Temperature": 
+                    return builder.createTempDataSet(data);
+                case "Humidity":
+                    return builder.createHumidityDataSet(data);
+                case "Barometer":
+                    return builder.createBarometerDataSet(data);
+                case "Wind Speed":
+                    return builder.createWindSpeedDataSet(data);
+                case "Wind Gust":
+                    return builder.createWindGustDataSet(data);
+                case "Wind Chill":
+                    return builder.createWindChillDataSet(data);
+                case "Heat Index":
+                    return builder.createHeatIndexDataSet(data);
+                case "UV Index":
+                    return builder.createUVIndexDataSet(data);
+                case "Rainfall":
+                    return builder.createRainFallDataSet(data);
+                default: 
+                    System.out.println("Something");
+            }
+        }
+        else if (scope == "Day")
+        {
+            MyDay data = (MyDay) obj;
+            switch(option){
+                case "Temperature": 
+                    return builder.createTempDataSet(data);
+                case "Humidity":
+                    return builder.createHumidityDataSet(data);
+                case "Barometer":
+                    return builder.createBarometerDataSet(data);
+                case "Wind Speed":
+                    return builder.createWindSpeedDataSet(data);
+                case "Wind Gust":
+                    return builder.createWindGustDataSet(data);
+                case "Wind Chill":
+                    return builder.createWindChillDataSet(data);
+                case "Heat Index":
+                    return builder.createHeatIndexDataSet(data);
+                case "UV Index":
+                    return builder.createUVIndexDataSet(data);
+                case "Rainfall":
+                    return builder.createRainFallDataSet(data);
+                default: 
+                    System.out.println("Something");
+            }
+        }
+        
+        return new TimeSeriesCollection();
+    }
+    
+    private void setScope()
+    {
+        if (allDataRadioButton.isSelected())
+            scope = "All";
+        if (yearRadioButton.isSelected())
+            scope = "Year";
+        if (monthRadioButton.isSelected())
+            scope = "Month";
+        if (dayRadioButton.isSelected())
+            scope = "Day";
+    }
+    
     private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
+        refreshGraph();
+    }//GEN-LAST:event_goButtonActionPerformed
+
+    private void refreshGraph()
+    {
         Date date = (Date) datePicker.getValue();
         Calendar calDate = Calendar.getInstance();
         calDate.setTime(date);
         int year = calDate.get(Calendar.YEAR);
         int month = calDate.get(Calendar.MONTH) + 1;
         int day = calDate.get(Calendar.DAY_OF_MONTH);
+        setScope();
         switch (scope) {
             case "All":
-                return;
+                graph.getXYPlot().setDataset(buildDataSet(parser.years, (String) graphOptions.getSelectedItem()));
+                TemperatureDateTuple maxTemp = StatisticsCalculator.MaxTemperature(parser.years);
+                highLabelValue.setText(((Float) maxTemp.temperature).toString());
+                String thing = maxTemp.date.getMonth() + "/" + maxTemp.date.getDayOfMonth() + "/" + maxTemp.date.getYear();
+                highTempDateValue.setText(thing);
+                break;
             case "Year":
                 System.out.println("year thing");
                 for(MyYear y: parser.years){
                     if(y.yearNumber == year){
-                        DatasetBuilder builder = new DatasetBuilder();
-                        graph.getXYPlot().setDataset(builder.createTempDataSet(y));
+                        graph.getXYPlot().setDataset(buildDataSet(y, (String) graphOptions.getSelectedItem()));
                         break;
                     }
                 }
@@ -551,8 +674,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                     if(y.yearNumber == year){
                         for(MyMonth m: y.months){
                             if(m.monthOfYear == month){
-                                DatasetBuilder builder = new DatasetBuilder();
-                                graph.getXYPlot().setDataset(builder.createTempDataSet(m));
+                                graph.getXYPlot().setDataset(buildDataSet(m, (String) graphOptions.getSelectedItem()));
                                 break;
                             }
                         }
@@ -568,8 +690,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                             if(m.monthOfYear == month){
                                 for(MyDay d: m.days){
                                     if(d.dayOfMonth == day){
-                                        DatasetBuilder builder = new DatasetBuilder();
-                                        graph.getXYPlot().setDataset(builder.createTempDataSet(d));
+                                        graph.getXYPlot().setDataset(buildDataSet(d, (String) graphOptions.getSelectedItem()));
                                         break;
                                     }
                                 }
@@ -584,8 +705,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
                 return;
         }
         System.out.println(month + "/" + day + "/" + year);
-    }//GEN-LAST:event_goButtonActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */
@@ -623,8 +743,10 @@ public class WeatherServiceUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton allDataRadioButton;
+    private javax.swing.JLabel averageWindLabel;
     private javax.swing.JLabel avgLabel;
     private javax.swing.JLabel avgLabelValue;
+    private javax.swing.JLabel avgWindSpeedValue;
     private javax.swing.JSpinner datePicker;
     private javax.swing.JRadioButton dayRadioButton;
     private javax.swing.JMenu editMenu;
@@ -637,12 +759,15 @@ public class WeatherServiceUI extends javax.swing.JFrame {
     private javax.swing.JPanel graphPanel;
     private javax.swing.JLabel highLabel;
     private javax.swing.JLabel highLabelValue;
+    private javax.swing.JLabel highTempDateValue;
     private javax.swing.JLabel lowLabel;
     private javax.swing.JLabel lowLabelValue;
+    private javax.swing.JLabel lowTempDateValue;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane mainScrollPane;
     private javax.swing.JToolBar mainToolbar;
+    private javax.swing.JLabel maxWindDateValue;
     private javax.swing.JLabel maxWindLabel;
     private javax.swing.JRadioButton monthRadioButton;
     private javax.swing.JButton openFileButton;
