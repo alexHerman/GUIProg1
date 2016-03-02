@@ -59,7 +59,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         plot.setRangeCrosshairVisible(true);
 
         XYItemRenderer r = plot.getRenderer();
-        r.setToolTipGenerator(g);
+	r.setBaseToolTipGenerator(g);
         if (r instanceof XYLineAndShapeRenderer) {
             XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) r;
             renderer.setBaseShapesVisible(true);
