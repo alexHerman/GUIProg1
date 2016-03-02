@@ -21,7 +21,7 @@ import static weatherservice.XmlUtil.asList;
  * @author Alex
  */
 public class XMLParser {
-    public ArrayList<MyYear> years = new ArrayList<MyYear>();
+    public static ArrayList<MyYear> years = new ArrayList<MyYear>();
     public static Calendar maxDate = null;
     public static Calendar minDate = null;
     

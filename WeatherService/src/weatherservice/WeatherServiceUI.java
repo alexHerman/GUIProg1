@@ -48,9 +48,12 @@ public class WeatherServiceUI extends javax.swing.JFrame {
 
         XYPlot plot = (XYPlot) graph.getPlot();
         plot.setBackgroundPaint(Color.lightGray);
-        StandardXYToolTipGenerator g = new StandardXYToolTipGenerator(
-            StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
-            new SimpleDateFormat("d-MMM-yyyy"), new DecimalFormat("0.00"));
+	
+        //StandardXYToolTipGenerator g = new StandardXYToolTipGenerator(
+        //    StandardXYToolTipGenerator.DEFAULT_TOOL_TIP_FORMAT,
+        //    new SimpleDateFormat("d-MMM-yyyy"), new DecimalFormat("0.00"));
+		ToolTipGenerator g = new ToolTipGenerator();
+	
         plot.setDomainGridlinePaint(Color.white);
         plot.setRangeGridlinePaint(Color.white);
         plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
@@ -58,7 +61,7 @@ public class WeatherServiceUI extends javax.swing.JFrame {
         plot.setRangeCrosshairVisible(true);
 
         XYItemRenderer r = plot.getRenderer();
-        r.setToolTipGenerator(g);
+	r.setBaseToolTipGenerator(g);
         if (r instanceof XYLineAndShapeRenderer) {
             XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) r;
             renderer.setBaseShapesVisible(true);
