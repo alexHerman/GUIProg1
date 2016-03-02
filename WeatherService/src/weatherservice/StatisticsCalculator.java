@@ -504,7 +504,7 @@ public class StatisticsCalculator
 
         for(MyYear i : year)
         {
-            current = MaxWindSpeed(i);
+            current = MinWindSpeed(i);
 
             if(current.windspeed < min.windspeed)
             {
@@ -531,7 +531,7 @@ public class StatisticsCalculator
 
         for(MyMonth month : year.months)
         {
-            current = MaxWindSpeed(month);
+            current = MinWindSpeed(month);
 
             if(current.windspeed < min.windspeed)
             {
@@ -558,7 +558,7 @@ public class StatisticsCalculator
 
         for(MyDay day : month.days)
         {
-            current = MaxWindSpeed(day);
+            current = MinWindSpeed(day);
 
             if(current.windspeed < min.windspeed)
             {
