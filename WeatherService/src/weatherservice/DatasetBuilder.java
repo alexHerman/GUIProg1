@@ -80,10 +80,7 @@ public class DatasetBuilder {
             {
                 for (MyDay day : month.days)
                 {
-                    for(DataPoint point : day.dataPoints)
-                    {
-                        s1.addOrUpdate(point, point.temperature);
-                    }
+                    s1.addOrUpdate(day.dataPoints.get(0), StatisticsCalculator.MeanTemperature(day));
                 }
             }
         }
@@ -155,10 +152,7 @@ public class DatasetBuilder {
             {
                 for (MyDay day : month.days)
                 {
-                    for(DataPoint point : day.dataPoints)
-                    {
-                        s1.addOrUpdate(point, point.barometer);
-                    }
+                    s1.addOrUpdate(day.dataPoints.get(0), day.dataPoints.get(0).barometer);
                 }
             }
         }
@@ -231,10 +225,7 @@ public class DatasetBuilder {
             {
                 for (MyDay day : month.days)
                 {
-                    for(DataPoint point : day.dataPoints)
-                    {
-                        s1.addOrUpdate(point, point.humidity);
-                    }
+                    s1.addOrUpdate(day.dataPoints.get(0), day.dataPoints.get(0).humidity);
                 }
             }
         }
@@ -306,10 +297,7 @@ public class DatasetBuilder {
             {
                 for (MyDay day : month.days)
                 {
-                    for(DataPoint point : day.dataPoints)
-                    {
-                        s1.addOrUpdate(point, point.windspeed);
-                    }
+                    s1.addOrUpdate(day.dataPoints.get(0), StatisticsCalculator.MeanWindSpeed(day));
                 }
             }
         }
@@ -381,10 +369,7 @@ public class DatasetBuilder {
             {
                 for (MyDay day : month.days)
                 {
-                    for(DataPoint point : day.dataPoints)
-                    {
-                        s1.addOrUpdate(point, point.windgust);
-                    }
+                    s1.addOrUpdate(day.dataPoints.get(0), StatisticsCalculator.MaxWindSpeed(day).windspeed);
                 }
             }
         }
@@ -456,10 +441,7 @@ public class DatasetBuilder {
             {
                 for (MyDay day : month.days)
                 {
-                    for(DataPoint point : day.dataPoints)
-                    {
-                        s1.addOrUpdate(point, point.windchill);
-                    }
+                    s1.addOrUpdate(day.dataPoints.get(0), day.dataPoints.get(0).windchill);
                 }
             }
         }
@@ -531,10 +513,7 @@ public class DatasetBuilder {
             {
                 for (MyDay day : month.days)
                 {
-                    for(DataPoint point : day.dataPoints)
-                    {
-                        s1.addOrUpdate(point, point.heatindex);
-                    }
+                    s1.addOrUpdate(day.dataPoints.get(0), day.dataPoints.get(0).heatindex);
                 }
             }
         }
@@ -606,10 +585,7 @@ public class DatasetBuilder {
             {
                 for (MyDay day : month.days)
                 {
-                    for(DataPoint point : day.dataPoints)
-                    {
-                        s1.addOrUpdate(point, point.uvindex);
-                    }
+                    s1.addOrUpdate(day.dataPoints.get(0), day.dataPoints.get(0).uvindex);
                 }
             }
         }
@@ -681,10 +657,7 @@ public class DatasetBuilder {
             {
                 for (MyDay day : month.days)
                 {
-                    for(DataPoint point : day.dataPoints)
-                    {
-                        s1.addOrUpdate(point, point.rainfall);
-                    }
+                    s1.addOrUpdate(day.dataPoints.get(0), day.dataPoints.get(0).rainfall);
                 }
             }
         }

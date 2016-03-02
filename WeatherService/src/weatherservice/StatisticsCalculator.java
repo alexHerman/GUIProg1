@@ -671,7 +671,8 @@ public class StatisticsCalculator
 
         for(DataPoint point : day.dataPoints)
         {
-            windDirection[point.winddirection.ordinal()]++;
+            if(point.winddirection != null)
+                windDirection[point.winddirection.ordinal()]++;
         }
 
         result = FindWindDirectionMode(windDirection);
